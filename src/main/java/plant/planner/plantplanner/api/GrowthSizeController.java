@@ -3,6 +3,7 @@ package plant.planner.plantplanner.api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.tinylog.Logger;
 import plant.planner.plantplanner.dto.SizeDto;
 import plant.planner.plantplanner.service.interfaces.GrowthSizeService;
 
@@ -20,10 +21,11 @@ public class GrowthSizeController {
 
     @PostMapping("/growth")
     public ResponseEntity<SizeDto> create(@RequestBody SizeDto newEntry) {
-        if (newEntry.getId() == 0) {
+      try{
             SizeDto result = service.addNewGrowthSize(newEntry);
             return new ResponseEntity<>(result, HttpStatus.CREATED);
-        } else {
+        } catch (IllegalArgumentException e) {
+          Logger.error(e);
             return ResponseEntity.badRequest().build();
         }
     }

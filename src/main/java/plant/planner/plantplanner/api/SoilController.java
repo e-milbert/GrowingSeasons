@@ -3,6 +3,7 @@ package plant.planner.plantplanner.api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.tinylog.Logger;
 import plant.planner.plantplanner.dto.SoilDto;
 import plant.planner.plantplanner.service.interfaces.SoilService;
 
@@ -19,10 +20,11 @@ public class SoilController {
 
     @PostMapping("/soil")
     public ResponseEntity<SoilDto> create(@RequestBody SoilDto newEntry) {
-        if (newEntry.getId() == 0) {
+        try {
             SoilDto result = service.addNewSoil(newEntry);
             return new ResponseEntity<>(result, HttpStatus.CREATED);
-        } else {
+        } catch (IllegalArgumentException e) {
+            Logger.error(e);
             return ResponseEntity.badRequest().build();
         }
     }

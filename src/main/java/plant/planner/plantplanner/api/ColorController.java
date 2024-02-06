@@ -3,6 +3,7 @@ package plant.planner.plantplanner.api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.tinylog.Logger;
 import plant.planner.plantplanner.dto.ColorDto;
 import plant.planner.plantplanner.service.interfaces.ColorsService;
 
@@ -21,10 +22,11 @@ public class ColorController {
     @PostMapping("/color")
     public ResponseEntity<ColorDto> create(@RequestBody ColorDto newColor) {
 
-        if (newColor.getId() == 0) {
+        try {
             ColorDto result = service.addNewColor(newColor);
             return new ResponseEntity<>(result, HttpStatus.CREATED);
-        } else {
+        } catch (IllegalArgumentException e) {
+            Logger.error(e);
             return ResponseEntity.badRequest().build();
         }
     }

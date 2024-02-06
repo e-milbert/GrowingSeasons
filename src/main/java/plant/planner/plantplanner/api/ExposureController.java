@@ -3,6 +3,7 @@ package plant.planner.plantplanner.api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.tinylog.Logger;
 import plant.planner.plantplanner.dto.ExposureLevelDto;
 import plant.planner.plantplanner.service.interfaces.ExposureLevelService;
 
@@ -20,10 +21,11 @@ public class ExposureController {
 
     @PostMapping("/exposure")
     public ResponseEntity<ExposureLevelDto> create(@RequestBody ExposureLevelDto newEntry) {
-        if (newEntry.getId() == 0) {
+       try {
             ExposureLevelDto result = service.addNewExposureLevel(newEntry);
             return new ResponseEntity<>(result, HttpStatus.CREATED);
-        } else {
+        } catch (IllegalArgumentException e) {
+           Logger.error(e);
             return ResponseEntity.badRequest().build();
         }
     }
