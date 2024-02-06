@@ -1,15 +1,17 @@
 package plant.planner.plantplanner.api;
 
+import org.apache.juli.logging.Log;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.tinylog.Logger;
 import plant.planner.plantplanner.dto.CurrentWeatherData;
 import plant.planner.plantplanner.dto.DailyWeatherData;
 import plant.planner.plantplanner.dto.SoilSixDaysData;
+import plant.planner.plantplanner.dto.WeatherSettings;
 import plant.planner.plantplanner.service.interfaces.WeatherService;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,6 +25,23 @@ public class WeatherController {
         this.weatherService = weatherService;
     }
 
+    @PostMapping("/weather/update")
+    public ResponseEntity<?> updateWeatherSettings(@RequestBody WeatherSettings newSettings){
+
+        try{
+            weatherService.updateSettings(newSettings);
+            return new ResponseEntity<>(HttpStatus.OK);
+
+        }catch (IllegalArgumentException ex){
+            Logger.error(ex);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch (IOException ex){
+            Logger.error(ex);
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
+        }
+
+
+    }
     @GetMapping("/weather/current")
     public ResponseEntity<?> getCurrent() {
         String body = "";
@@ -33,6 +52,7 @@ public class WeatherController {
             }
         } catch (Exception ex) {
             body = Arrays.toString(ex.getStackTrace());
+
         }
         return ResponseEntity
                 .internalServerError()

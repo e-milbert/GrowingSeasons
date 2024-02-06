@@ -8,24 +8,27 @@ import org.tinylog.Logger;
 import plant.planner.plantplanner.dto.CurrentWeatherData;
 import plant.planner.plantplanner.dto.DailyWeatherData;
 import plant.planner.plantplanner.dto.SoilSixDaysData;
+import plant.planner.plantplanner.dto.WeatherSettings;
 import plant.planner.plantplanner.helpers.NetworkConnChecker;
 import plant.planner.plantplanner.service.interfaces.WeatherService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.io.IOException;
+import java.util.*;
+//TODO refactoring needed
 @Service
 public class WeatherServiceImpl implements WeatherService {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    //exchange longitude and latitude in url from Brandenburger Tor to own garden
-    private String weatherApi = "https://api.open-meteo.com/v1/forecast?latitude=52.51&longitude=13.37&current=temperature_2m,rain,showers,snowfall,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,relative_humidity_2m,rain,showers,snowfall,soil_temperature_0cm,soil_temperature_6cm,soil_moisture_0_to_1cm,soil_moisture_3_to_9cm&daily=temperature_2m_max,temperature_2m_min,sunshine_duration,uv_index_max,rain_sum,showers_sum,snowfall_sum,wind_speed_10m_max,wind_gusts_10m_max&timezone=Europe/Berlin";
+    //default settings to Brandenburger Tor in Berlin
+    private float longitude =52.51f;
+    private float latitude=13.37f;
+    private String timezone="Europe/Berlin";
+    private String weatherApi = String.format(Locale.US, "https://api.open-meteo.com/v1/forecast?latitude=%" +
+            ".2f&longitude=%.2f&current=temperature_2m,rain,showers,snowfall,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,relative_humidity_2m,rain,showers,snowfall,soil_temperature_0cm,soil_temperature_6cm,soil_moisture_0_to_1cm,soil_moisture_3_to_9cm&daily=temperature_2m_max,temperature_2m_min,sunshine_duration,uv_index_max,rain_sum,showers_sum,snowfall_sum,wind_speed_10m_max,wind_gusts_10m_max&timezone=%s", latitude,longitude,timezone);
     private Map<String, Object> weatherData = new HashMap<>();
 
-    public WeatherServiceImpl() {
+    public WeatherServiceImpl() throws IOException {
         getExternalData();
     }
 
@@ -39,7 +42,32 @@ public class WeatherServiceImpl implements WeatherService {
 
     }
 
-    public void getExternalData() {
+    public void updateSettings(WeatherSettings settings) throws IOException {
+
+        if(settings.getLatitude()!=getLatitude() && settings.getLatitude()!=0.0f){
+            setLatitude(settings.getLatitude());
+        }
+        if(settings.getLongitude()!=getLongitude() && settings.getLongitude()!=0.0f){
+            setLongitude(settings.getLongitude());
+        }
+        if(!Objects.equals(settings.getTimezone(), getTimezone()) && settings.getTimezone()!=null){
+            setTimezone(settings.getTimezone());
+        }
+
+        setWeatherApi(String.format(Locale.US, "https://api.open-meteo.com/v1/forecast?latitude=%" +
+                ".2f&longitude=%.2f&current=temperature_2m,rain,showers,snowfall,cloud_cover,wind_speed_10m," +
+                "wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,relative_humidity_2m,rain,showers,snowfall," +
+                "soil_temperature_0cm,soil_temperature_6cm,soil_moisture_0_to_1cm," +
+                "soil_moisture_3_to_9cm&daily=temperature_2m_max,temperature_2m_min,sunshine_duration,uv_index_max," +
+                "rain_sum,showers_sum,snowfall_sum,wind_speed_10m_max,wind_gusts_10m_max&timezone=%s", this.latitude,
+                this.longitude,this.timezone)
+   );
+        getExternalData();
+
+    }
+
+    public void getExternalData() throws IOException {
+        Logger.info(weatherApi);
 
         if (NetworkConnChecker.hasInternet()) {
             try {
@@ -52,9 +80,15 @@ public class WeatherServiceImpl implements WeatherService {
                         setWeatherData(result);
                     }
                 }
+                if (response.getStatusCode()== HttpStatus.NOT_FOUND){
+                    throw new IllegalArgumentException("provided settings for weather api are faulty");
+                }
             } catch (Exception ex) {
                 Logger.error(ex);
             }
+        }
+        else {
+            throw new IOException("no internet connection");
         }
     }
 
@@ -143,6 +177,29 @@ public class WeatherServiceImpl implements WeatherService {
         this.weatherApi = weatherApi;
     }
 
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getTimezone() {
+        return timezone;
+    }
+
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
+    }
 }
 
 
