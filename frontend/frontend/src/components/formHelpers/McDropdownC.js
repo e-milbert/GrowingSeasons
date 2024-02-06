@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Dropdown, DropdownItem} from 'react-bootstrap';
 
-export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdownname, bxIcon}) {
+export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdownname, bxIcon, onAddingNew}) {
 
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [availableOptions, setAvailableOptions] = useState(data);
@@ -15,6 +15,10 @@ export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdo
             setAvailableOptions((prevOptions) => prevOptions.filter((option) => option[valueKey] !== selectedValue));
         }
     };
+
+    const handleNewElement=()=>{
+        onAddingNew()
+    }
 
     const handleRemove = (removeValue) => {
         const newSelectedOptions = selectedOptions.filter(item => item[valueKey] !== removeValue);
@@ -38,9 +42,11 @@ export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdo
                         </div>
                         <Dropdown.Menu>
                             {availableOptions.map((item, index) => (
-                                <DropdownItem onClick={() => handleChange(item[valueKey])}>
+                                <Dropdown.Item onClick={() => handleChange(item[valueKey])}>
                                     {item[valueKey]}
-                                </DropdownItem>))}
+                                </Dropdown.Item>))}
+                            <Dropdown.Item className={"text-center"} onClick={()=> handleNewElement()}>
+                                <i className='bx bx-plus bx-xs'></i> </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
