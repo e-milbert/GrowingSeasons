@@ -6,8 +6,21 @@ export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdo
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [availableOptions, setAvailableOptions] = useState(data);
 
+    useEffect(() => {
+        if(selectedOptions.length===0){
+        setAvailableOptions(data)}
+        else{
+            setAvailableOptions(data);
+            selectedOptions.forEach(selected=>(
+                handleChange(selected)
+            ))
+
+        }
+
+    }, [data]);
+
     const handleChange = (selectedValue) => {
-        const selectedObject = data.find(item => item[valueKey].toString() === selectedValue);
+        const selectedObject = data.find(item => item[valueKey] === selectedValue);
 
         if (selectedObject) {
             setSelectedOptions(prevSelectedOptions => [...prevSelectedOptions, selectedObject]);
