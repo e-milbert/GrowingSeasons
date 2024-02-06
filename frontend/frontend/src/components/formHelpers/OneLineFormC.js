@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import {useState} from "react";
 
-export function OneLineFormC({labelText, placeholderText, idName, handleInputChangeFunction}) {
+export function OneLineFormC({labelText, placeholderText, idName, handleInputChangeFunction, focus=false}) {
 
     const [inputValue, setInputValue] = useState('');
 
@@ -24,6 +24,7 @@ export function OneLineFormC({labelText, placeholderText, idName, handleInputCha
                     aria-describedby={idName}
                     value={inputValue}
                     onChange={onChange}
+                    autoFocus={focus}
                 />
             </InputGroup>
         </>
