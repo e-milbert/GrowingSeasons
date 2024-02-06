@@ -6,15 +6,20 @@ import {OneLineFormC} from "../formHelpers/OneLineFormC";
 import {DynamicDropdown, DynamicSingleValueChoiceDropdown} from "../formHelpers/McDropdownC";
 import {
     colorsGetAllColors,
+    colorsPostColor,
     exposureGetAllExposures,
+    exposurePostExposure,
     germinationGetAllGerminations,
     growthGetAllGrowth,
+    growthPostGrowth,
     plantPostPlant,
     soilGetAllSoils,
+    soilPostSoil,
     timelinePutUpdate
 } from "../../constants/apiConstants";
 import {QuarterMonthTimeLinePicker2} from "../formHelpers/QuarterMonthTimeLinePicker";
 import {LoadingAnimation} from "../shared/LoadingAnimation";
+import {AddAttributeModal} from "./AddAttributeModal";
 
 
 export function NewDbEntryC() {
@@ -47,6 +52,13 @@ export function NewDbEntryC() {
     const [harvestingTimes, setHarvestingTimes] = useState([]);
     const [bloomingTimes, setBloomingTimes] = useState([]);
 
+    const [showNewColor, setShowNewColor] = useState(false);
+    const [showNewSoil, setShowNewSoil] = useState(false);
+    const [showNewExposure, setShowNewExposure] = useState(false);
+    const [showNewGrowth, setShowNewGrowth] = useState(false);
+
+    const [refetch, setRefetch] = useState(false);
+
     const [isLoading, setIsLoading] = useState(true);
 
     const [minGerm, setMinGerm] = useState()
@@ -56,6 +68,7 @@ export function NewDbEntryC() {
         minGerminationTemp: minGerm,
         maxGerminationTemp: maxGerm
     }
+
 
     useEffect(() => {
         const fetchPromises = [
@@ -80,12 +93,14 @@ export function NewDbEntryC() {
         Promise.all(fetchPromises)
             .then(() => {
                 setIsLoading(false);
+                setRefetch(false);
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
                 setIsLoading(false);
+                setRefetch(false);
             });
-    }, []);
+    }, [refetch]);
 
     const handleEdible = (event) => {
         setIsEdible(event.target.checked);
@@ -95,6 +110,120 @@ export function NewDbEntryC() {
     }
     const handlePoisonous = (event) => {
         setIsPoisonous(event.target.checked);
+    }
+
+
+    const handleAddNewSoil = async (newSoil) => {
+        const newSoilJson = {type: newSoil};
+
+        try {
+            const response = await fetch(soilPostSoil, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newSoilJson)
+            });
+
+            if (response.ok) {
+                // The POST request was successful, data is in the database
+                setRefetch(true);
+                setShowNewSoil(false);
+            } else {
+                // Handle non-OK response status (e.g., display an error message)
+                console.error('Failed to post:', response.status);
+                setShowNewSoil(false);
+            }
+        } catch (error) {
+            // Handle any network or fetch-related errors
+            console.error('Error:', error);
+            setShowNewSoil(false);
+        }
+    }
+
+    const handleAddNewExposure = async (newExposure) => {
+
+        const newExposureJson = {type: newExposure};
+
+        try {
+            const response = await fetch(exposurePostExposure, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newExposureJson)
+            });
+
+            if (response.ok) {
+                // The POST request was successful, data is in the database
+                setRefetch(true);
+                setShowNewExposure(false);
+            } else {
+                // Handle non-OK response status (e.g., display an error message)
+                console.error('Failed to post:', response.status);
+                setShowNewExposure(false);
+            }
+        } catch (error) {
+            // Handle any network or fetch-related errors
+            console.error('Error:', error);
+            setShowNewExposure(false);
+        }
+
+    }
+
+    const handleAddNewGrowth = async (newGrowth) => {
+        const newGrowthJson = {size: newGrowth};
+        try {
+            const response = await fetch(growthPostGrowth, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newGrowthJson)
+            });
+
+            if (response.ok) {
+                // The POST request was successful, data is in the database
+                setRefetch(true);
+                setShowNewGrowth(false);
+            } else {
+                // Handle non-OK response status (e.g., display an error message)
+                console.error('Failed to post:', response.status);
+                setShowNewGrowth(false);
+            }
+        } catch (error) {
+            // Handle any network or fetch-related errors
+            console.error('Error:', error);
+            setShowNewGrowth(false);
+        }
+    }
+
+    const handleNewColor = async (newColor) => {
+        const newColorJson = {name: newColor};
+
+        try {
+            const response = await fetch(colorsPostColor, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newColorJson)
+            });
+
+            if (response.ok) {
+                // The POST request was successful, data is in the database
+                setRefetch(true);
+                setShowNewColor(false);
+            } else {
+                // Handle non-OK response status (e.g., display an error message)
+                console.error('Failed to post:', response.status);
+                setShowNewColor(false);
+            }
+        } catch (error) {
+            // Handle any network or fetch-related errors
+            console.error('Error:', error);
+            setShowNewColor(false);
+        }
     }
 
     const handleSubmit = async () => {
@@ -280,21 +409,42 @@ export function NewDbEntryC() {
                                                  dropdownname="color"
                                                  data={allcolors}
                                                  valueKey="name"
-                                                 onSelectedOptionsChange={setChosenColors}/>
+                                                 onSelectedOptionsChange={setChosenColors}
+                                                 onAddingNew={() => setShowNewColor(true)}/>
+
+                                {showNewColor &&
+                                    <AddAttributeModal isShowing={showNewColor} setIsShowing={setShowNewColor}
+                                                       setDataCallback={handleNewColor} typeName={"color"}
+                                                       validationType={"string"}/>
+                                }
 
                                 <DynamicDropdown bxIcon="bx bx-sun mx-3"
                                                  key="expo"
                                                  dropdownname="exposure"
                                                  data={allExposures}
                                                  valueKey="type"
-                                                 onSelectedOptionsChange={setChosenExposures}/>
+                                                 onSelectedOptionsChange={setChosenExposures}
+                                                 onAddingNew={() => setShowNewExposure(true)}/>
+                                {showNewExposure &&
+                                    <AddAttributeModal isShowing={showNewExposure} setIsShowing={setShowNewExposure}
+                                                       setDataCallback={handleAddNewExposure}
+                                                       typeName={"exposure type"} validationType={"string"}/>
+                                }
 
                                 <DynamicDropdown bxIcon="bx bx-vertical-bottom mx-3"
                                                  key="soil"
                                                  dropdownname="soil"
                                                  data={allSoils}
                                                  valueKey="type"
-                                                 onSelectedOptionsChange={setChosenSoils}/>
+                                                 onSelectedOptionsChange={setChosenSoils}
+                                                 onAddingNew={() => setShowNewSoil(true)}/>
+                                {showNewSoil &&
+                                    <AddAttributeModal isShowing={showNewSoil} setIsShowing={setShowNewSoil}
+                                                       setDataCallback={handleAddNewSoil} typeName={"soil type"}
+                                                       validationType={"string"}/>
+                                }
+
+
                             </div>
 
                             <div className="mb-4">
@@ -302,14 +452,23 @@ export function NewDbEntryC() {
                                 <DynamicSingleValueChoiceDropdown bxIcon="bx bx-up-arrow-alt mx-3"
                                                                   data={allSizes} valueKey="size"
                                                                   onSelectedOptionsChange={setHeightSize}
-                                                                  dropdownname="height"/>
+                                                                  dropdownname="height"
+                                                                  onAddingNew={() => setShowNewGrowth(true)}/>
 
 
                                 <DynamicSingleValueChoiceDropdown bxIcon="bx bx-right-arrow-alt mx-3"
                                                                   data={allSizes}
                                                                   valueKey="size"
                                                                   onSelectedOptionsChange={setWidthSize}
-                                                                  dropdownname="width"/>
+                                                                  dropdownname="width"
+                                                                  onAddingNew={() => setShowNewGrowth(true)}/>
+
+                                {showNewGrowth &&
+                                    <AddAttributeModal isShowing={showNewGrowth} setIsShowing={setShowNewGrowth}
+                                                       setDataCallback={handleAddNewGrowth} typeName={"size"}
+                                                       validationType={"number"}/>
+                                }
+
                             </div>
                             <div className="mb-4">
                                 <Row>
