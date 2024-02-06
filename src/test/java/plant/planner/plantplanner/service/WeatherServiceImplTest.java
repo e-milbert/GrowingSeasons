@@ -20,8 +20,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyString;
 
+
 @ExtendWith(MockitoExtension.class)
 class WeatherServiceImplTest {
+
+    // INFO this test will not work if there is no internet connection or if you have a proxy in place
 
     @Mock
     private RestTemplate restTemplate;
