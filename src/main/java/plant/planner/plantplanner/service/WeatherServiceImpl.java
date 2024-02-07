@@ -14,6 +14,9 @@ import plant.planner.plantplanner.service.interfaces.WeatherService;
 
 import java.io.IOException;
 import java.util.*;
+
+import static plant.planner.plantplanner.helpers.NullHandler.possibleNullFiltering;
+
 //TODO refactoring needed
 @Service
 public class WeatherServiceImpl implements WeatherService {
@@ -109,10 +112,11 @@ public class WeatherServiceImpl implements WeatherService {
         if (!getWeatherData().isEmpty()) {
             try {
                 Map<String, Object> hourlyData = (Map<String, Object>) getWeatherData().get("hourly");
-                List<Double> soil0 = (ArrayList<Double>) hourlyData.get("soil_temperature_0cm");
-                List<Double> soil6 = (ArrayList<Double>) hourlyData.get("soil_temperature_6cm");
-                List<Double> moist1 = (ArrayList<Double>) hourlyData.get("soil_moisture_0_to_1cm");
-                List<Double> moist2 = (ArrayList<Double>) hourlyData.get("soil_moisture_3_to_9cm");
+
+                List<Double> soil0 = possibleNullFiltering((ArrayList<Double>) hourlyData.get("soil_temperature_0cm"));
+                List<Double> soil6 = possibleNullFiltering((ArrayList<Double>) hourlyData.get("soil_temperature_6cm"));
+                List<Double> moist1 = possibleNullFiltering((ArrayList<Double>) hourlyData.get("soil_moisture_0_to_1cm"));
+                List<Double> moist2 = possibleNullFiltering((ArrayList<Double>) hourlyData.get("soil_moisture_3_to_9cm"));
 
                 return new SoilSixDaysData(soil0, soil6, moist1, moist2);
             } catch (Exception ex) {
