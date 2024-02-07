@@ -249,6 +249,12 @@ export function EditPlantC({plant, afterSubmit, reload}) {
     const handlePoisonous = (event) => {
         setPoisonous(event.target.checked);
     }
+    const handleMinGermination=(value)=>{
+        if(value > maxGerm){
+            setMaxGerm(value)
+        }
+        setMinGerm(value);
+    }
 
 
     return (
@@ -361,7 +367,7 @@ export function EditPlantC({plant, afterSubmit, reload}) {
                                 <Row>
                                     <h5 className="text-start m-3">germination temperature</h5>
                                     <Col>
-                                        <OneLineFormC idName="germmin" handleInputChangeFunction={setMinGerm}
+                                        <OneLineFormC idName="germmin" handleInputChangeFunction={handleMinGermination}
                                                       labelText="min temperature" placeholderText={minGerm}/>
                                     </Col>
                                     <Col>

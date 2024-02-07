@@ -45,7 +45,6 @@ export function NewDbEntryC() {
     const [heightSize, setHeightSize] = useState({});
     const [widthSize, setWidthSize] = useState({});
 
-    const [allGermTemp, setAllGermTemp] = useState([]);
 
     const [sowingTimes, setSowingTimes] = useState([]);
     const [plantingTimes, setPlantingTimes] = useState([]);
@@ -63,11 +62,19 @@ export function NewDbEntryC() {
 
     const [minGerm, setMinGerm] = useState()
     const [maxGerm, setMaxGerm] = useState()
-
-    const germination = {
-        minGerminationTemp: minGerm,
-        maxGerminationTemp: maxGerm
+const [showHint,setShowHint]=useState(false);
+    const germination={
+        minGerminationTemp:minGerm,
+        maxGerminationTemp:maxGerm
     }
+
+    useEffect(() => {
+        if(minGerm>maxGerm){
+            setShowHint(true);
+        }else {
+            setShowHint(false)
+        }
+    }, [minGerm, maxGerm]);
 
 
     useEffect(() => {
@@ -84,9 +91,7 @@ export function NewDbEntryC() {
             fetch(growthGetAllGrowth)
                 .then(response => response.json())
                 .then(data => setSizes(data)),
-            fetch(germinationGetAllGerminations)
-                .then(response => response.json())
-                .then(data => setAllGermTemp(data))
+
 
         ];
 
@@ -101,6 +106,24 @@ export function NewDbEntryC() {
                 setRefetch(false);
             });
     }, [refetch]);
+
+    const handleMinGermination=(value)=>{
+        setMinGerm(value);
+
+        if (value > maxGerm) {
+            setMaxGerm(value);
+        }
+        console.log( minGerm, maxGerm)
+    }
+    const handleMaxGermination=(value)=>{
+        setMaxGerm(value);
+
+        if (value < minGerm) {
+            setMinGerm(value);
+        }
+        console.log( minGerm, maxGerm)
+    }
+
 
     const handleEdible = (event) => {
         setIsEdible(event.target.checked);
@@ -227,8 +250,6 @@ export function NewDbEntryC() {
     }
 
     const handleSubmit = async () => {
-
-        console.log("expo " + chosenExposures)
 
         try {
 
@@ -475,14 +496,20 @@ export function NewDbEntryC() {
                                     <h5 className="text-start m-3">germination temperature</h5>
                                     <Col>
                                         <OneLineFormC idName="germmin" handleInputChangeFunction={setMinGerm}
-                                                      labelText="min temperature" placeholderText=""/>
+                                                      labelText="min temperature" placeholderText={""}/>
                                     </Col>
                                     <Col>
                                         <OneLineFormC idName="germmax" handleInputChangeFunction={setMaxGerm}
-                                                      labelText="max temperature" placeholderText=""/>
+                                                      labelText="max temperature" placeholderText={""}/>
                                     </Col>
                                 </Row>
-                            </div>
+                                {showHint&&
+                                    <Row className={"text-center"}>
+                                    <div className={"fs-6 text-white-50 text-center fw-light"}>please check your temperatures again</div>
+
+                                    </Row>
+                                }
+                                </div>
 
 
                             <div className="mb-4">
