@@ -12,7 +12,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import plant.planner.plantplanner.dto.WeatherSettings;
+import plant.planner.plantplanner.entity.WeatherPreferences;
 import plant.planner.plantplanner.helpers.NetworkConnChecker;
+import plant.planner.plantplanner.helpers.WeatherSettingsMapper;
+import plant.planner.plantplanner.helpers.WeatherSettingsMapperImpl;
+import plant.planner.plantplanner.repository.WeatherPreferencesRepository;
+
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,22 +25,37 @@ import java.util.Locale;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
 class WeatherServiceImplTest {
 
-    // INFO this test will not work if there is no internet connection or if you have a proxy in place
-
+    // TODO this test will not work if there is no internet connection or if you have a proxy in place
+    private final WeatherSettingsMapper mapper = new WeatherSettingsMapperImpl();
+    @InjectMocks
+    private WeatherServiceImpl weatherService;
     @Mock
     private RestTemplate restTemplate;
 
-    @InjectMocks
-    private WeatherServiceImpl weatherService;
-
+    @Mock
+    private WeatherPreferencesRepository repository;
 
     private Map<String, Object> mockResponse;
+
+    private WeatherPreferences defaultSettings;
+
+    @BeforeEach
+    public void setUp() throws IOException {
+        weatherService = new WeatherServiceImpl(repository,mapper);
+
+        defaultSettings=new WeatherPreferences();
+        defaultSettings.setLatitude(4.5f);
+        defaultSettings.setLongitude(50.98f);
+
+    }
 
 
     @Test
@@ -54,8 +74,6 @@ class WeatherServiceImplTest {
         mockResponse.put("current", currentData);
         mockResponse.put("current_units", currentUnits);
 
-        ResponseEntity<Map> responseEntity = new ResponseEntity<>(mockResponse, HttpStatus.OK);
-        Mockito.when(restTemplate.getForEntity(anyString(), Mockito.eq(Map.class))).thenReturn(responseEntity);
 
         try (MockedStatic<NetworkConnChecker> mockedStatic = Mockito.mockStatic(NetworkConnChecker.class)) {
             mockedStatic.when(NetworkConnChecker::hasInternet).thenReturn(true);
@@ -70,15 +88,16 @@ class WeatherServiceImplTest {
     }
 
     @Test
-    public void shouldUpdateUrlWithNewValues() throws IOException {
+    public void shouldReturnDefaultSettings() throws IOException {
 
-        WeatherSettings s = new WeatherSettings(4.55f,70.25f,"Pacific/Auckland");
+        WeatherSettings s = new WeatherSettings(4.55f,70.25f);
 
+        when(repository.save(any(WeatherPreferences.class))).thenReturn(mapper.toWeatherPreferences(s));
         weatherService.updateSettings(s);
         String url = weatherService.getWeatherApi();
 
 
-        assertTrue(url.contains(s.getTimezone()));
+
         assertTrue(url.contains(String.format(Locale.US,"%.2f",s.getLongitude())));
         assertTrue(url.contains(String.format(Locale.US,"%.2f",s.getLatitude())));
 

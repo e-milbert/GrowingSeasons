@@ -2,17 +2,26 @@ package plant.planner.plantplanner.dto;
 
 public class WeatherSettings {
 
+    private long id;
     private float longitude;
     private float latitude;
-    private String timezone;
+
 
     public WeatherSettings() {
     }
 
-    public WeatherSettings(float longitude, float latitude, String timezone) {
+    public WeatherSettings(float longitude, float latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
-        this.timezone = timezone;
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public float getLongitude() {
@@ -31,11 +40,5 @@ public class WeatherSettings {
         this.latitude = latitude;
     }
 
-    public String getTimezone() {
-        return timezone;
-    }
 
-    public void setTimezone(String timezone) {
-        this.timezone = timezone;
-    }
 }

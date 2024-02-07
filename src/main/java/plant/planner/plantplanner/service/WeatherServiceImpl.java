@@ -9,7 +9,10 @@ import plant.planner.plantplanner.dto.CurrentWeatherData;
 import plant.planner.plantplanner.dto.DailyWeatherData;
 import plant.planner.plantplanner.dto.SoilSixDaysData;
 import plant.planner.plantplanner.dto.WeatherSettings;
+import plant.planner.plantplanner.entity.WeatherPreferences;
 import plant.planner.plantplanner.helpers.NetworkConnChecker;
+import plant.planner.plantplanner.helpers.WeatherSettingsMapper;
+import plant.planner.plantplanner.repository.WeatherPreferencesRepository;
 import plant.planner.plantplanner.service.interfaces.WeatherService;
 
 import java.io.IOException;
@@ -21,18 +24,35 @@ import static plant.planner.plantplanner.helpers.NullHandler.possibleNullFilteri
 @Service
 public class WeatherServiceImpl implements WeatherService {
 
-    RestTemplate restTemplate = new RestTemplate();
+    private final WeatherPreferencesRepository repository;
+    private final WeatherSettingsMapper mapper;
 
-    //default settings to Brandenburger Tor in Berlin
-    private float longitude =52.51f;
-    private float latitude=13.37f;
-    private String timezone="Europe/Berlin";
-    private String weatherApi = String.format(Locale.US, "https://api.open-meteo.com/v1/forecast?latitude=%" +
-            ".2f&longitude=%.2f&current=temperature_2m,rain,showers,snowfall,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,relative_humidity_2m,rain,showers,snowfall,soil_temperature_0cm,soil_temperature_6cm,soil_moisture_0_to_1cm,soil_moisture_3_to_9cm&daily=temperature_2m_max,temperature_2m_min,sunshine_duration,uv_index_max,rain_sum,showers_sum,snowfall_sum,wind_speed_10m_max,wind_gusts_10m_max&timezone=%s", latitude,longitude,timezone);
+    RestTemplate restTemplate = new RestTemplate();
+    private String urlUnformatted = "https://api.open-meteo.com/v1/forecast?latitude=%.2f&longitude=%" +
+            ".2f&current=temperature_2m,rain,showers,snowfall,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,relative_humidity_2m,rain,showers,snowfall,soil_temperature_0cm,soil_temperature_6cm,soil_moisture_0_to_1cm,soil_moisture_3_to_9cm&daily=temperature_2m_max,temperature_2m_min,sunshine_duration,uv_index_max,rain_sum,showers_sum,snowfall_sum,wind_speed_10m_max,wind_gusts_10m_max&timezone=auto";
+
+
+    private String weatherApi = null;
     private Map<String, Object> weatherData = new HashMap<>();
 
-    public WeatherServiceImpl() throws IOException {
+    public WeatherServiceImpl(WeatherPreferencesRepository repository, WeatherSettingsMapper mapper) throws IOException {
+        this.repository = repository;
+        this.mapper = mapper;
+        setUpUrl();
         getExternalData();
+    }
+
+    private void setUpUrl() {
+        Optional<WeatherPreferences> opt = repository.findById(1L);
+        var wp = opt.orElse(null);
+        if (wp == null) {
+            //Set to default Brandenburger Tor Berlin
+            WeatherSettings settings = new WeatherSettings(52.51f, 13.37f);
+            setWeatherApi(this.urlUnformatted, settings);
+        } else {
+            setWeatherApi(this.urlUnformatted, mapper.toWeatherSettings(wp));
+        }
+
     }
 
 
@@ -47,30 +67,20 @@ public class WeatherServiceImpl implements WeatherService {
 
     public void updateSettings(WeatherSettings settings) throws IOException {
 
-        if(settings.getLatitude()!=getLatitude() && settings.getLatitude()!=0.0f){
-            setLatitude(settings.getLatitude());
-        }
-        if(settings.getLongitude()!=getLongitude() && settings.getLongitude()!=0.0f){
-            setLongitude(settings.getLongitude());
-        }
-        if(!Objects.equals(settings.getTimezone(), getTimezone()) && settings.getTimezone()!=null){
-            setTimezone(settings.getTimezone());
-        }
+        try {
 
-        setWeatherApi(String.format(Locale.US, "https://api.open-meteo.com/v1/forecast?latitude=%" +
-                ".2f&longitude=%.2f&current=temperature_2m,rain,showers,snowfall,cloud_cover,wind_speed_10m," +
-                "wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,relative_humidity_2m,rain,showers,snowfall," +
-                "soil_temperature_0cm,soil_temperature_6cm,soil_moisture_0_to_1cm," +
-                "soil_moisture_3_to_9cm&daily=temperature_2m_max,temperature_2m_min,sunshine_duration,uv_index_max," +
-                "rain_sum,showers_sum,snowfall_sum,wind_speed_10m_max,wind_gusts_10m_max&timezone=%s", this.latitude,
-                this.longitude,this.timezone)
-   );
-        getExternalData();
+            WeatherPreferences pref = repository.save(mapper.toWeatherPreferences(settings));
+            setWeatherApi(this.urlUnformatted, mapper.toWeatherSettings(pref));
+            getExternalData();
+
+        } catch (IOException ex) {
+            Logger.error(ex);
+            throw ex;
+        }
 
     }
 
     public void getExternalData() throws IOException {
-        Logger.info(weatherApi);
 
         if (NetworkConnChecker.hasInternet()) {
             try {
@@ -83,14 +93,14 @@ public class WeatherServiceImpl implements WeatherService {
                         setWeatherData(result);
                     }
                 }
-                if (response.getStatusCode()== HttpStatus.NOT_FOUND){
+                if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
+                    Logger.info("something is wrong with the url: " + weatherApi);
                     throw new IllegalArgumentException("provided settings for weather api are faulty");
                 }
             } catch (Exception ex) {
                 Logger.error(ex);
             }
-        }
-        else {
+        } else {
             throw new IOException("no internet connection");
         }
     }
@@ -126,6 +136,8 @@ public class WeatherServiceImpl implements WeatherService {
         }
         return null;
     }
+
+
 
     public List<DailyWeatherData> getForecastWeek() {
         if (!getWeatherData().isEmpty()) {
@@ -177,33 +189,11 @@ public class WeatherServiceImpl implements WeatherService {
         return weatherApi;
     }
 
-    public void setWeatherApi(String weatherApi) {
-        this.weatherApi = weatherApi;
+    public void setWeatherApi(String url, WeatherSettings settings) {
+        this.weatherApi = String.format(Locale.US, url, settings.getLatitude(), settings.getLongitude());
     }
 
-    public float getLongitude() {
-        return longitude;
-    }
 
-    public void setLongitude(float longitude) {
-        this.longitude = longitude;
-    }
-
-    public float getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(float latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getTimezone() {
-        return timezone;
-    }
-
-    public void setTimezone(String timezone) {
-        this.timezone = timezone;
-    }
 }
 
 
