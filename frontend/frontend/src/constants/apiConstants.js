@@ -38,7 +38,7 @@ export const soilGetAllSoils = `${baseUrl}/soils`;
 export const weatherCurrent = `${baseUrl}/weather/current`;
 export const soilTemp = `${baseUrl}/weather/soil`;
 export const forecastWeek = `${baseUrl}/weather/forecast`;
-export const updatePostWeatherSettings=`${baseUrl}/weather/update`
+export const updatePostWeatherSettings = `${baseUrl}/weather/update`
 
 export const shutdownInit = `${baseUrl}/shutdown`;
 

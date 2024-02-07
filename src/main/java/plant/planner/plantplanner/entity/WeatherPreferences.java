@@ -19,7 +19,9 @@ public class WeatherPreferences {
     private float latitude;//-90 - +90
 
 
-    public WeatherPreferences(){this.businessKey=generateBusinessKey();}
+    public WeatherPreferences() {
+        this.businessKey = generateBusinessKey();
+    }
 
     public long getId() {
         return id;
@@ -52,8 +54,6 @@ public class WeatherPreferences {
     public void setLatitude(float latitude) {
         this.latitude = latitude;
     }
-
-
 
 
     @Override

@@ -2,7 +2,6 @@ import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import {OneLineFormC} from "../formHelpers/OneLineFormC";
 import {useState} from "react";
 import {updatePostWeatherSettings} from "../../constants/apiConstants";
-import {LoadingAnimation} from "../shared/LoadingAnimation";
 
 export function Setting() {
 
@@ -85,19 +84,21 @@ export function Setting() {
                                     </Col>
                                     <Col>
                                         {!loadingWeatherUpdate ?
-                                        <Button
+                                            <Button
                                                 className={"custom-button text-black p-2"} type={"button"}
                                                 onClick={updateWeather}>submit</Button> :
-                                                <i className='bx bxs-florist text-white bx-tada bx-md'/>
-                                            }
+                                            <i className='bx bxs-florist text-white bx-tada bx-md'/>
+                                        }
                                     </Col>
                                 </Row>
                                 {weatherPreference.latitude > 90 || weatherPreference.latitude < -90 || weatherPreference.longitude > 180 || weatherPreference.longitude < -180 ?
                                     <Row>
                                         <Col>
-                                            <div className={"ms-5 fs-6 fw-normal text-warning-emphasis"}>latitude is from -180 to 180and longitude is from -90 to 90 </div>
+                                            <div className={"ms-5 fs-6 fw-normal text-warning-emphasis"}>latitude is
+                                                from -180 to 180and longitude is from -90 to 90
+                                            </div>
                                         </Col>
-                                    </Row>:null
+                                    </Row> : null
                                 }
                             </Card.Body>
 

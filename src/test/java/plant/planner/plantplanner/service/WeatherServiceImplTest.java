@@ -8,8 +8,6 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import plant.planner.plantplanner.dto.WeatherSettings;
 import plant.planner.plantplanner.entity.WeatherPreferences;
@@ -18,7 +16,6 @@ import plant.planner.plantplanner.helpers.WeatherSettingsMapper;
 import plant.planner.plantplanner.helpers.WeatherSettingsMapperImpl;
 import plant.planner.plantplanner.repository.WeatherPreferencesRepository;
 
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
@@ -26,7 +23,6 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 
@@ -49,9 +45,9 @@ class WeatherServiceImplTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        weatherService = new WeatherServiceImpl(repository,mapper);
+        weatherService = new WeatherServiceImpl(repository, mapper);
 
-        defaultSettings=new WeatherPreferences();
+        defaultSettings = new WeatherPreferences();
         defaultSettings.setLatitude(4.5f);
         defaultSettings.setLongitude(50.98f);
 
@@ -90,16 +86,15 @@ class WeatherServiceImplTest {
     @Test
     public void shouldReturnDefaultSettings() throws IOException {
 
-        WeatherSettings s = new WeatherSettings(4.55f,70.25f);
+        WeatherSettings s = new WeatherSettings(4.55f, 70.25f);
 
         when(repository.save(any(WeatherPreferences.class))).thenReturn(mapper.toWeatherPreferences(s));
         weatherService.updateSettings(s);
         String url = weatherService.getWeatherApi();
 
 
-
-        assertTrue(url.contains(String.format(Locale.US,"%.2f",s.getLongitude())));
-        assertTrue(url.contains(String.format(Locale.US,"%.2f",s.getLatitude())));
+        assertTrue(url.contains(String.format(Locale.US, "%.2f", s.getLongitude())));
+        assertTrue(url.contains(String.format(Locale.US, "%.2f", s.getLatitude())));
 
 
     }

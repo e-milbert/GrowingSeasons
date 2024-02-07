@@ -1,6 +1,5 @@
 package plant.planner.plantplanner.helpers;
 
-import org.mapstruct.Condition;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import plant.planner.plantplanner.dto.WeatherSettings;
@@ -11,8 +10,8 @@ public interface WeatherSettingsMapper {
     ActionTimeLineMapper INSTANCE = Mappers.getMapper(ActionTimeLineMapper.class);
 
     WeatherSettings toWeatherSettings(WeatherPreferences weatherPreferences);
-    WeatherPreferences toWeatherPreferences(WeatherSettings settings);
 
+    WeatherPreferences toWeatherPreferences(WeatherSettings settings);
 
 
 }

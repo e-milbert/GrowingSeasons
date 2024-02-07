@@ -21,11 +21,11 @@ public class GrowthSizeController {
 
     @PostMapping("/growth")
     public ResponseEntity<SizeDto> create(@RequestBody SizeDto newEntry) {
-      try{
+        try {
             SizeDto result = service.addNewGrowthSize(newEntry);
             return new ResponseEntity<>(result, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-          Logger.error(e);
+            Logger.error(e);
             return ResponseEntity.badRequest().build();
         }
     }

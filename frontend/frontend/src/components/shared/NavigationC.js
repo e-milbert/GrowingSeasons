@@ -46,7 +46,8 @@ export function NavigationC() {
                                     <Nav.Link className="nav-font-style" href="/entries">Database</Nav.Link>
                                     <Nav.Link className="nav-font-style" href="/addtodatabase">
                                         Entry Form</Nav.Link>
-                                    <Nav.Link className="nav-font-style" href="/settings"><i className='bx bxs-cog bx-sm bx-spin-hover align-middle '/></Nav.Link>
+                                    <Nav.Link className="nav-font-style" href="/settings"><i
+                                        className='bx bxs-cog bx-sm bx-spin-hover align-middle '/></Nav.Link>
                                 </Nav>
                                 <Button className="bg-transparent border-0 text-white text-end"
                                         onClick={() => setWasShutdown(true)}><i

@@ -21,11 +21,11 @@ public class ExposureController {
 
     @PostMapping("/exposure")
     public ResponseEntity<ExposureLevelDto> create(@RequestBody ExposureLevelDto newEntry) {
-       try {
+        try {
             ExposureLevelDto result = service.addNewExposureLevel(newEntry);
             return new ResponseEntity<>(result, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-           Logger.error(e);
+            Logger.error(e);
             return ResponseEntity.badRequest().build();
         }
     }

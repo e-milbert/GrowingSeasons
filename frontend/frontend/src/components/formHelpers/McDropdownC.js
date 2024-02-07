@@ -7,11 +7,11 @@ export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdo
     const [availableOptions, setAvailableOptions] = useState(data);
 
     useEffect(() => {
-        if(selectedOptions.length===0){
-        setAvailableOptions(data)}
-        else{
+        if (selectedOptions.length === 0) {
+            setAvailableOptions(data)
+        } else {
             setAvailableOptions(data);
-            selectedOptions.forEach(selected=>(
+            selectedOptions.forEach(selected => (
                 handleChange(selected)
             ))
 
@@ -29,7 +29,7 @@ export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdo
         }
     };
 
-    const handleNewElement=()=>{
+    const handleNewElement = () => {
         onAddingNew()
     }
 
@@ -58,7 +58,7 @@ export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdo
                                 <Dropdown.Item onClick={() => handleChange(item[valueKey])}>
                                     {item[valueKey]}
                                 </Dropdown.Item>))}
-                            <Dropdown.Item className={"text-center"} onClick={()=> handleNewElement()}>
+                            <Dropdown.Item className={"text-center"} onClick={() => handleNewElement()}>
                                 <i className='bx bx-plus bx-xs'></i> </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
@@ -82,11 +82,18 @@ export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdo
     </>);
 }
 
-export function DynamicSingleValueChoiceDropdown({data, valueKey, onSelectedOptionsChange, dropdownname, bxIcon, onAddingNew}) {
+export function DynamicSingleValueChoiceDropdown({
+                                                     data,
+                                                     valueKey,
+                                                     onSelectedOptionsChange,
+                                                     dropdownname,
+                                                     bxIcon,
+                                                     onAddingNew
+                                                 }) {
     const [selectedOption, setSelectedOption] = useState(null);
 
     useEffect(() => {
-        if(selectedOption!=null){
+        if (selectedOption != null) {
             handleChange(selectedOption)
         }
 
@@ -101,7 +108,7 @@ export function DynamicSingleValueChoiceDropdown({data, valueKey, onSelectedOpti
             onSelectedOptionsChange(selectedObject);
         }
     };
-    const handleNewElement=()=>{
+    const handleNewElement = () => {
         onAddingNew()
     }
 
@@ -126,7 +133,7 @@ export function DynamicSingleValueChoiceDropdown({data, valueKey, onSelectedOpti
                                     {item[valueKey]}
                                 </DropdownItem>))}
 
-                            <Dropdown.Item className={"text-center"} onClick={()=> handleNewElement()}>
+                            <Dropdown.Item className={"text-center"} onClick={() => handleNewElement()}>
                                 <i className='bx bx-plus bx-xs'></i> </Dropdown.Item>
                         </Dropdown.Menu>
 

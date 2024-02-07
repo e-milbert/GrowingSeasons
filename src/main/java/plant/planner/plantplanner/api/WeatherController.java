@@ -1,6 +1,5 @@
 package plant.planner.plantplanner.api;
 
-import org.apache.juli.logging.Log;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,22 +25,23 @@ public class WeatherController {
     }
 
     @PostMapping("/weather/update")
-    public ResponseEntity<?> updateWeatherSettings(@RequestBody WeatherSettings newSettings){
+    public ResponseEntity<?> updateWeatherSettings(@RequestBody WeatherSettings newSettings) {
 
-        try{
+        try {
             weatherService.updateSettings(newSettings);
             return new ResponseEntity<>(HttpStatus.OK);
 
-        }catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             Logger.error(ex);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }catch (IOException ex){
+        } catch (IOException ex) {
             Logger.error(ex);
             return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
 
 
     }
+
     @GetMapping("/weather/current")
     public ResponseEntity<?> getCurrent() {
         String body = "";

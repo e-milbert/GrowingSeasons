@@ -138,7 +138,6 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
 
-
     public List<DailyWeatherData> getForecastWeek() {
         if (!getWeatherData().isEmpty()) {
             try {

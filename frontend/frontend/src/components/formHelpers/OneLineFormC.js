@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import {useState} from "react";
 
-export function OneLineFormC({labelText, placeholderText, idName, handleInputChangeFunction, focus=false}) {
+export function OneLineFormC({labelText, placeholderText, idName, handleInputChangeFunction, focus = false}) {
 
     const [inputValue, setInputValue] = useState('');
 

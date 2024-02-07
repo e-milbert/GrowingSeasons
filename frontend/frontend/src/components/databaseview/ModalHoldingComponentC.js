@@ -14,7 +14,6 @@ export function ModalHoldingComponentC({data, reload}) {
     const [isDeleted, setIsDeleted] = useState(false);
 
 
-
     useEffect(() => {
         const fetchPromises = [
             fetch(plantGetSingleById.replace("{id}", data.id))
@@ -31,7 +30,6 @@ export function ModalHoldingComponentC({data, reload}) {
                 setIsLoading(false);
             });
     }, []);
-
 
 
     function handleHide(boolValue) {
@@ -92,7 +90,7 @@ export function ModalHoldingComponentC({data, reload}) {
                 <Modal.Header closeButton>
                     <Modal.Title id="planteditor">
 
-                    Edit
+                        Edit
 
 
                     </Modal.Title>
