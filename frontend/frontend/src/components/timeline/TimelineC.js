@@ -70,6 +70,9 @@ export function TimelineCompParent({plants, months}) {
                             <div key={item.id + '-' + item.name} className="pt-3">
                                 {item.name}
                             </div>
+                            <div>
+                                {item.officialName}
+                            </div>
                         </Col>
 
 

@@ -6,6 +6,7 @@ public class TimeLinePlantDto {
 
     private long plantId;
     private String name;
+    private String officialName;
     private List<Integer> sowing;
     private long sowingId;
     private List<Integer> planting;
@@ -21,16 +22,27 @@ public class TimeLinePlantDto {
     public TimeLinePlantDto(
             long plantId,
             String name,
+            String officialName,
             List<Integer> sowing,
             List<Integer> planting,
             List<Integer> bloom,
             List<Integer> harvest) {
         this.plantId = plantId;
         this.name = name;
+        this.officialName=officialName;
         this.sowing = sowing;
         this.planting = planting;
         this.bloom = bloom;
         this.harvest = harvest;
+
+    }
+
+    public String getOfficialName() {
+        return officialName;
+    }
+
+    public void setOfficialName(String officialName) {
+        this.officialName = officialName;
     }
 
     public long getSowingId() {

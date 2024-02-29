@@ -62,6 +62,8 @@ public class ActionTimeLineServiceImpl implements ActionTimeLineService {
 
         timeLinePlantDto.setName(plant.getCommonName());
 
+        timeLinePlantDto.setOfficialName(plant.getPublicName());
+
         for (var timeline : tls) {
             var name = timeline.getActionType();
 
@@ -102,28 +104,16 @@ public class ActionTimeLineServiceImpl implements ActionTimeLineService {
         ArrayList<ActionTimeLineAggregate> timelines = new ArrayList<>();
 
         Optional<SowingDates> s = sowingR.findByPlantId(plantId);
-        SowingDates sd = s.orElse(null);
-        if (sd != null) {
-            timelines.add(mapper.toActionTimeLineAggregate(plantId, sd));
-        }
+        s.ifPresent(sd -> timelines.add(mapper.toActionTimeLineAggregate(plantId, sd)));
 
         Optional<PlantingDates> p = plantingR.findByPlantId(plantId);
-        PlantingDates pd = p.orElse(null);
-        if (pd != null) {
-            timelines.add(mapper.toActionTimeLineAggregate(plantId, pd));
-        }
+        p.ifPresent(pd -> timelines.add(mapper.toActionTimeLineAggregate(plantId, pd)));
 
         Optional<HarvestingDates> h = harvestingR.findByPlantId(plantId);
-        HarvestingDates hd = h.orElse(null);
-        if (hd != null) {
-            timelines.add(mapper.toActionTimeLineAggregate(plantId, hd));
-        }
+        h.ifPresent(hd -> timelines.add(mapper.toActionTimeLineAggregate(plantId, hd)));
 
         Optional<FloweringDates> f = floweringR.findByPlantId(plantId);
-        FloweringDates fd = f.orElse(null);
-        if (fd != null) {
-            timelines.add(mapper.toActionTimeLineAggregate(plantId, fd));
-        }
+        f.ifPresent(fd -> timelines.add(mapper.toActionTimeLineAggregate(plantId, fd)));
 
 
         return timelines;
