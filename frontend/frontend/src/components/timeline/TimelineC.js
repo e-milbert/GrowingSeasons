@@ -67,11 +67,11 @@ export function TimelineCompParent({plants, months}) {
                     <React.Fragment key={item.id}>
 
                         <Col className="col-1 col-border">
-                            <div key={item.id + '-' + item.name} className="pt-3">
+                            <div key={item.id + '-' + item.name} className="pt-3 overflow-auto">
                                 {item.name}
                             </div>
-                            <div>
-                                {item.officialName}
+                            <div key={item.id + '-' + item.officialName} className="overflow-auto">
+                               {item.officialName}
                             </div>
                         </Col>
 
