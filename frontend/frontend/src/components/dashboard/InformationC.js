@@ -92,6 +92,13 @@ export function InformationC() {
             });
     }, []);
 
+    const forecastDateWithoutYear = (dateString) => {
+        const parts = dateString.split("-")
+        return (
+            `${parts[1]}-${parts[2]}`
+        )
+    }
+
 
     return (
         <>
@@ -107,38 +114,32 @@ export function InformationC() {
                     <Carousel.Item interval={8000}>
                         <CarouselWeatherBack/>
                         <Carousel.Caption>
-
+                            <h4>{date} {currentWeather["time"]}</h4>
                             <table className="table text-black table-bg-transp-blur ">
-                                <thead>
-                                <tr>
-                                    <th colSpan="2"><h4>{date} {currentWeather["time"]}</h4></th>
-                                </tr>
-                                </thead>
+
                                 <tbody className="text-start fw-semibold">
                                 <tr>
-                                    <td>Temperature:</td>
+                                    <td><i className='bx bxs-thermometer bx-sm'/></td>
                                     <td>{currentWeather["temperature_2m"]}</td>
-                                </tr>
-                                <tr>
-                                    <td>Rain:</td>
+
+                                    <td><i className={"bx bx-cloud-drizzle bx-sm"}/></td>
                                     <td>{currentWeather["rain"]}</td>
                                 </tr>
                                 <tr>
-                                    <td>Showers:</td>
+                                    <td><i className={"bx bx-cloud bx-sm"}/></td>
+                                    <td>{currentWeather["cloud_cover"]}</td>
+
+                                    <td><i className={"bx bx-cloud-rain bx-sm"}/></td>
                                     <td>{currentWeather["showers"]}</td>
                                 </tr>
                                 <tr>
-                                    <td>Snow:</td>
+                                    <td><i className={"bx bx-wind bx-sm"}/></td>
+                                    <td>{currentWeather["wind_speed_10m"]} - {currentWeather["wind_gusts_10m"]}</td>
+
+                                    <td><i className={"bx bx-cloud-snow bx-sm"}/></td>
                                     <td>{currentWeather["snowfall"]}</td>
                                 </tr>
-                                <tr>
-                                    <td>Clouds:</td>
-                                    <td>{currentWeather["cloud_cover"]}</td>
-                                </tr>
-                                <tr>
-                                    <td>Wind:</td>
-                                    <td>~ {currentWeather["wind_speed_10m"]} - {currentWeather["wind_gusts_10m"]}</td>
-                                </tr>
+
                                 </tbody>
                             </table>
                         </Carousel.Caption>
@@ -147,36 +148,32 @@ export function InformationC() {
                     <Carousel.Item interval={8000}>
                         <CarouselWeatherBack/>
                         <Carousel.Caption>
-
+                            <h4 className={"text-center"}>soil conditions this week</h4>
                             <table className="table text-black table-bg-transp-blur ">
                                 <thead>
                                 <tr>
-                                    <th colSpan="3"><h4>soil conditions this week</h4></th>
-                                </tr>
-                                <tr className="text-start">
-                                    <th>
+                                    <th scope={"col"} colSpan={1} className={"text-start"}>
                                     </th>
-                                    <th>
-                                        temperature
+                                    <th scope={"col"} colSpan={1} className={"text-start"}>
+                                        <i className='bx bxs-thermometer bx-sm'/>
                                     </th>
-                                    <th>
-                                        avg. moisture
+                                    <th scope={"col"} colSpan={1} className={"text-start"}>
+                                        <i className='bx bx-droplet bx-sm'></i>
                                     </th>
                                 </tr>
                                 </thead>
+
                                 <tbody className="text-start fw-semibold ">
                                 <tr>
                                     <td>surface:</td>
-                                    <td>{soilTemps["tempAt0cmMin"]} up
-                                        to {soilTemps["tempAt0cmMax"]}</td>
+                                    <td>{soilTemps["tempAt0cmMin"]} to {soilTemps["tempAt0cmMax"]}</td>
                                     <td>
                                         {soilTemps["moistureTo1cm"]}%
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>around 6cm:</td>
-                                    <td>{soilTemps["tempAt6cmMin"]} up
-                                        to {soilTemps["tempAt6cmMax"]}</td>
+                                    <td>{soilTemps["tempAt6cmMin"]} to {soilTemps["tempAt6cmMax"]}</td>
                                     <td>
                                         {soilTemps["moisture3To9cm"]}%
                                     </td>
@@ -190,39 +187,38 @@ export function InformationC() {
                     <Carousel.Item interval={8000}>
                         <CarouselWeatherBack/>
                         <Carousel.Caption>
+                            <h4>forecast</h4>
                             <table className="table table-sm text-black table-bg-transp-blur ">
-                                <thead>
-                                <tr>
-                                    <th colSpan="6"><h4>forecast</h4></th>
-                                </tr>
-                                <tr className="text-start">
-                                    <th>
-                                        date
-                                    </th>
-                                    <th>
-                                        temperatures
-                                    </th>
-                                    <th>
-                                        sun
-                                    </th>
-                                    <th>
-                                        rain
-                                    </th>
-                                    <th>
-                                        wind
-                                    </th>
-                                    <th>
-                                        uv
-                                    </th>
-                                </tr>
-                                </thead>
+<thead>
+<tr>
+                                <th scope={"col"}>
+
+                                </th>
+                                <th scope={"col"} className="text-start">
+                                    <i className='bx bxs-thermometer bx-sm'/>
+                                </th>
+                                <th scope={"col"} className="text-start">
+                                    <i className='bx bx-sun bx-sm'/>
+                                </th>
+                                <th scope={"col"} className="text-start">
+                                    <i className={"bx bx-cloud-drizzle bx-sm"}/>
+                                </th>
+                                <th scope={"col"} className="text-start">
+                                    <i className={"bx bx-wind bx-sm"}/>
+                                </th>
+                                <th scope={"col"} className="text-start">
+                                    uv
+                                </th>
+</tr>
+</thead>
+
                                 <tbody className="text-start fw-semibold ">
                                 {forecast.map((item, index) => (
                                     <tr key={index}>
-                                        <td>{item.date}</td>
-                                        <td>{item.tempMax}° / {item.tempMin}°</td>
+                                        <td>{forecastDateWithoutYear(item.date)}</td>
+                                        <td>{item.tempMax}° | {item.tempMin}°</td>
                                         <td>{item.sunshine} hrs</td>
-                                        <td>{item.rain + item.shower} mm</td>
+                                        <td>{(item.rain + item.shower).toFixed(1)} mm</td>
                                         <td>{item.wind} km/h</td>
                                         <td>{item.uv}</td>
                                     </tr>
