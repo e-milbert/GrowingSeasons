@@ -31,15 +31,15 @@ export function TimeLineTable() {
     return (
         <>
             {isLoading ? (
-                <Row className="min-vh-100 d-flex justify-content-center align-items-center">
-                    <Col className="d-flex justify-content-center align-items-center">
+                <div className="row min-vh-100 d-flex justify-content-center align-items-center">
+                    <div className="col d-flex justify-content-center align-items-center">
                         <LoadingAnimation/>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             ) : (
-                <Container className="bg-container rounded-3 text-center px-1 py-5">
+                <div className="container container-style text-center py-3">
                     <TimelineCompParent months={monthsShort} plants={allPlantsTimes}/>
-                </Container>
+                </div>
             )}
         </>
     )
