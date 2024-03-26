@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
-import Carousel from 'react-bootstrap/Carousel';
 
 import {forecastWeek, soilTemp, weatherCurrent} from "../../constants/apiConstants";
-import {CarouselWeatherBack} from "../formHelpers/CarouselWeatherBack";
 import {days, months} from "../../constants/helper";
 import {LoadingAnimation} from "../shared/LoadingAnimation";
 import {Container} from "react-bootstrap";
+import sunnycloud from "../../images/sunnycloud.jpg"
 
 
 export function InformationC() {
@@ -103,134 +102,156 @@ export function InformationC() {
     return (
         <>
             {isLoading ? (
-                <Container className="d-flex justify-content-center">
+                <div className="container d-flex justify-content-center">
                     <LoadingAnimation/>
-                </Container>
+                </div>
             ) : (
 
+                <div className={"rounded-3 pt-4"}>
 
-                <Carousel fade data-bs-theme="dark">
+                    <div id="weatherForecast" className="carousel carousel-dark slide"
+                         data-bs-ride="carousel">
+                        <div className="carousel-indicators">
+                            <button type="button" data-bs-target="#weatherForecast" data-bs-slide-to="0"
+                                    className="active" aria-current="true" aria-label="current weather"></button>
+                            <button type="button" data-bs-target="#weatherForecast" data-bs-slide-to="1"
+                                    aria-label="soil temperatures"></button>
+                            <button type="button" data-bs-target="#weatherForecast" data-bs-slide-to="2"
+                                    aria-label="forecast"></button>
+                        </div>
+                        <div className="carousel-inner">
 
-                    <Carousel.Item interval={8000}>
-                        <CarouselWeatherBack/>
-                        <Carousel.Caption>
-                            <h4>{date} {currentWeather["time"]}</h4>
-                            <table className="table text-black table-bg-transp-blur ">
+                            <img src={sunnycloud} className="d-block w-100" alt="sun and clouds in the sky"/>
 
-                                <tbody className="text-start fw-semibold">
-                                <tr>
-                                    <td><i className='bx bxs-thermometer bx-sm'/></td>
-                                    <td>{currentWeather["temperature_2m"]}</td>
+                            <div className="carousel-item active" data-bs-interval="8000">
+                                <div className="carousel-caption d-none d-md-block">
 
-                                    <td><i className={"bx bx-cloud-drizzle bx-sm"}/></td>
-                                    <td>{currentWeather["rain"]}</td>
-                                </tr>
-                                <tr>
-                                    <td><i className={"bx bx-cloud bx-sm"}/></td>
-                                    <td>{currentWeather["cloud_cover"]}</td>
+                                    <h4>{date} {currentWeather["time"]}</h4>
 
-                                    <td><i className={"bx bx-cloud-rain bx-sm"}/></td>
-                                    <td>{currentWeather["showers"]}</td>
-                                </tr>
-                                <tr>
-                                    <td><i className={"bx bx-wind bx-sm"}/></td>
-                                    <td>{currentWeather["wind_speed_10m"]} - {currentWeather["wind_gusts_10m"]}</td>
+                                    <table className="table text-black table-bg-transp-blur ">
+                                        <tbody className="text-start fw-semibold">
+                                        <tr>
+                                            <td><i className='bx bxs-thermometer bx-sm'/></td>
+                                            <td>{currentWeather["temperature_2m"]}</td>
 
-                                    <td><i className={"bx bx-cloud-snow bx-sm"}/></td>
-                                    <td>{currentWeather["snowfall"]}</td>
-                                </tr>
+                                            <td><i className={"bx bx-cloud-drizzle bx-sm"}/></td>
+                                            <td>{currentWeather["rain"]}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i className={"bx bx-cloud bx-sm"}/></td>
+                                            <td>{currentWeather["cloud_cover"]}</td>
 
-                                </tbody>
-                            </table>
-                        </Carousel.Caption>
-                    </Carousel.Item>
+                                            <td><i className={"bx bx-cloud-rain bx-sm"}/></td>
+                                            <td>{currentWeather["showers"]}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i className={"bx bx-wind bx-sm"}/></td>
+                                            <td>{currentWeather["wind_speed_10m"]} - {currentWeather["wind_gusts_10m"]}</td>
 
-                    <Carousel.Item interval={8000}>
-                        <CarouselWeatherBack/>
-                        <Carousel.Caption>
-                            <h4 className={"text-center"}>soil conditions this week</h4>
-                            <table className="table text-black table-bg-transp-blur ">
-                                <thead>
-                                <tr>
-                                    <th scope={"col"} colSpan={1} className={"text-start"}>
-                                    </th>
-                                    <th scope={"col"} colSpan={1} className={"text-start"}>
-                                        <i className='bx bxs-thermometer bx-sm'/>
-                                    </th>
-                                    <th scope={"col"} colSpan={1} className={"text-start"}>
-                                        <i className='bx bx-droplet bx-sm'></i>
-                                    </th>
-                                </tr>
-                                </thead>
+                                            <td><i className={"bx bx-cloud-snow bx-sm"}/></td>
+                                            <td>{currentWeather["snowfall"]}</td>
+                                        </tr>
 
-                                <tbody className="text-start fw-semibold ">
-                                <tr>
-                                    <td>surface:</td>
-                                    <td>{soilTemps["tempAt0cmMin"]} to {soilTemps["tempAt0cmMax"]}</td>
-                                    <td>
-                                        {soilTemps["moistureTo1cm"]}%
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>around 6cm:</td>
-                                    <td>{soilTemps["tempAt6cmMin"]} to {soilTemps["tempAt6cmMax"]}</td>
-                                    <td>
-                                        {soilTemps["moisture3To9cm"]}%
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
+                            <div className="carousel-item" data-bs-interval="8000">
+                                <div className="carousel-caption d-none d-md-block">
 
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item interval={8000}>
-                        <CarouselWeatherBack/>
-                        <Carousel.Caption>
-                            <h4>forecast</h4>
-                            <table className="table table-sm text-black table-bg-transp-blur ">
-<thead>
-<tr>
-                                <th scope={"col"}>
+                                    <h4 className={"text-center"}>soil conditions this week</h4>
+                                    <table className="table text-black table-bg-transp-blur ">
+                                        <thead>
+                                        <tr>
+                                            <th scope={"col"} colSpan={1} className={"text-start"}>
+                                            </th>
+                                            <th scope={"col"} colSpan={1} className={"text-start"}>
+                                                <i className='bx bxs-thermometer bx-sm'/>
+                                            </th>
+                                            <th scope={"col"} colSpan={1} className={"text-start"}>
+                                                <i className='bx bx-droplet bx-sm'></i>
+                                            </th>
+                                        </tr>
+                                        </thead>
 
-                                </th>
-                                <th scope={"col"} className="text-start">
-                                    <i className='bx bxs-thermometer bx-sm'/>
-                                </th>
-                                <th scope={"col"} className="text-start">
-                                    <i className='bx bx-sun bx-sm'/>
-                                </th>
-                                <th scope={"col"} className="text-start">
-                                    <i className={"bx bx-cloud-drizzle bx-sm"}/>
-                                </th>
-                                <th scope={"col"} className="text-start">
-                                    <i className={"bx bx-wind bx-sm"}/>
-                                </th>
-                                <th scope={"col"} className="text-start">
-                                    uv
-                                </th>
-</tr>
-</thead>
+                                        <tbody className="text-start fw-semibold ">
+                                        <tr>
+                                            <td>surface:</td>
+                                            <td>{soilTemps["tempAt0cmMin"]} to {soilTemps["tempAt0cmMax"]}</td>
+                                            <td>
+                                                {soilTemps["moistureTo1cm"]}%
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>around 6cm:</td>
+                                            <td>{soilTemps["tempAt6cmMin"]} to {soilTemps["tempAt6cmMax"]}</td>
+                                            <td>
+                                                {soilTemps["moisture3To9cm"]}%
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
-                                <tbody className="text-start fw-semibold ">
-                                {forecast.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{forecastDateWithoutYear(item.date)}</td>
-                                        <td>{item.tempMax}° | {item.tempMin}°</td>
-                                        <td>{item.sunshine} hrs</td>
-                                        <td>{(item.rain + item.shower).toFixed(1)} mm</td>
-                                        <td>{item.wind} km/h</td>
-                                        <td>{item.uv}</td>
-                                    </tr>
+                            <div className="carousel-item" data-bs-interval="8000">
+                                <div className="carousel-caption d-none d-md-block">
 
-                                ))}
-                                </tbody>
-                            </table>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                </Carousel>
+                                    <h4>forecast</h4>
+                                    <table className="table table-sm text-black table-bg-transp-blur ">
+                                        <thead>
+                                        <tr>
+                                            <th scope={"col"}>
 
+                                            </th>
+                                            <th scope={"col"} className="text-start">
+                                                <i className='bx bxs-thermometer bx-sm'/>
+                                            </th>
+                                            <th scope={"col"} className="text-start">
+                                                <i className='bx bx-sun bx-sm'/>
+                                            </th>
+                                            <th scope={"col"} className="text-start">
+                                                <i className={"bx bx-cloud-drizzle bx-sm"}/>
+                                            </th>
+                                            <th scope={"col"} className="text-start">
+                                                <i className={"bx bx-wind bx-sm"}/>
+                                            </th>
+                                            <th scope={"col"} className="text-start">
+                                                uv
+                                            </th>
+                                        </tr>
+                                        </thead>
 
+                                        <tbody className="text-start fw-semibold ">
+                                        {forecast.map((item, index) => (
+                                            <tr key={index}>
+                                                <td>{forecastDateWithoutYear(item.date)}</td>
+                                                <td>{item.tempMax}° | {item.tempMin}°</td>
+                                                <td>{item.sunshine} hrs</td>
+                                                <td>{(item.rain + item.shower).toFixed(1)} mm</td>
+                                                <td>{item.wind} km/h</td>
+                                                <td>{item.uv}</td>
+                                            </tr>
+
+                                        ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <button className="carousel-control-prev" type="button" data-bs-target="#weatherForecast"
+                                data-bs-slide="prev">
+                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button className="carousel-control-next" type="button" data-bs-target="#weatherForecast"
+                                data-bs-slide="next">
+                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span className="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
             )}
         </>
     )
