@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Button, Container, Nav, Navbar} from "react-bootstrap";
 
+
 import {Dashboard} from "../dashboard/Dashboard";
 import {DatabaseParent} from "../databaseview/DatabaseC";
 import {TimeLineTable} from "../timeline/TimeLineTable";
@@ -35,29 +36,43 @@ export function NavigationC() {
 
             ) : (
                 <BrowserRouter>
-                    <Navbar id="navbar-main" expand="lg" className="custom-header">
-                        <Container className="mt-5">
-                            <Navbar.Brand href="/" className="nav-font-style"><i
-                                className='bx bx-lg bxs-leaf align-middle bx-tada-hover'></i></Navbar.Brand>
-                            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className="me-auto">
-                                    <Nav.Link className="nav-font-style" href="/timeline">Timeline</Nav.Link>
-                                    <Nav.Link className="nav-font-style" href="/entries">Database</Nav.Link>
-                                    <Nav.Link className="nav-font-style" href="/addtodatabase">
-                                        Entry Form</Nav.Link>
-                                    <Nav.Link className="nav-font-style" href="/settings"><i
-                                        className='bx bxs-cog bx-sm bx-spin-hover align-middle '/></Nav.Link>
-                                </Nav>
-                                <Button className="bg-transparent border-0 text-white text-end"
+                    <nav className={"navbar navbar-expand-lg"} >
+                        <div className={"container-fluid"}>
+                            <a href="/" className={"navbar-brand"}><i
+                                className='bx bx-lg bxs-leaf align-middle bx-tada-hover text-sage-light'></i>
+                            </a>
+                            <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarMain" aria-controls="navbarMain"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span className="navbar-toggler-icon"></span>
+                            </button>
+                            <div className={"collapse navbar-collapse"} id="navbarMain">
+                                <ul className="me-auto navbar-nav mb-2 mb-lg-0 fs-5">
+                                    <li className={"nav-item"}>
+                                        <a className="nav-link fw-bold" aria-current={"page"}
+                                           href="/timeline">Timeline</a>
+                                    </li>
+                                    <li className={"nav-item"}>
+                                        <a className="nav-link fw-bold" href="/entries">Database</a>
+                                    </li>
+                                    <li className={"nav-item"}>
+                                        <a className="nav-link fw-bold" href="/addtodatabase">
+                                            New Entry</a>
+                                    </li>
+                                    <li className={"nav-item"}>
+                                        <a className="nav-link " href="/settings"><i
+                                            className='bx bxs-cog bx-sm bx-spin-hover align-middle '/></a>
+                                    </li>
+                                </ul>
+                                <button type={"button"} className="bg-transparent text-muted border-0 text-end"
                                         onClick={() => setWasShutdown(true)}><i
-                                    className='bx bx-power-off bx-md'/></Button>
-                            </Navbar.Collapse>
-                        </Container>
-                    </Navbar>
+                                    className='bx bx-power-off bx-md'/></button>
+                            </div>
+                        </div>
+                    </nav>
 
-                    <Container
-                        className="mt-5 px-5 bg-transparent align-self-md-center scrollable-main scrollbar-custom ">
+                    <div
+                        className="pt-5 scrollbar-custom">
                         <Routes>
                             <Route path="/" element={<Dashboard/>}/>
                             <Route path="/timeline" element={<TimeLineTable/>}/>
@@ -65,7 +80,7 @@ export function NavigationC() {
                             <Route path="/addtodatabase" element={<NewDbEntryC/>}/>
                             <Route path="/settings" element={<Setting/>}/>
                         </Routes>
-                    </Container>
+                    </div>
 
                 </BrowserRouter>
             )
