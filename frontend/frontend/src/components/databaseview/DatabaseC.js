@@ -152,7 +152,7 @@ export function DatabaseC({listOfData, headerMapping, reload}) {
 
 
     return (
-        <Container className="bg-container rounded-3 p-4">
+        <div className="container container-style p-4">
             <Row className="m-2 d-flex">
                 <Col>
                     <div className="d-flex my-2">
@@ -218,6 +218,6 @@ export function DatabaseC({listOfData, headerMapping, reload}) {
                     </tbody>
                 </Table>
             </Row>
-        </Container>
+        </div>
     );
 }
