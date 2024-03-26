@@ -6,29 +6,33 @@ export function TimelineCompParent({plants, months}) {
         <Row>
 
             <Row className="text-center"><h3>timeline</h3></Row>
-            <Row id="legend" className="col-4 my-4">
+            <Row id="legend" className=" my-1">
 
-                <Col className="col-3 mx-2 p-4">
+                <Col className="col-3 p-2">
 
 
-                    <div className="row dot plant mb-3 mx-5">
+                    <div className="row dot bg-planting mb-3 mx-3">
                         <div className="mx-1">planting</div>
                     </div>
-                    <div className="row dot harvest mx-5">
+                </Col>
+                <Col className="col-3 p-2">
+                    <div className="row dot bg-harvesting mx-3">
                         <div className="mx-1">harvesting</div>
                     </div>
 
 
                 </Col>
 
-                <Col className="col-3 mx-2 p-4 text-center">
+                <Col className="col-3 p-2 text-center">
 
 
-                    <div className="row dot bloom mb-3 mx-5">
+                    <div className="row dot bg-flowering mb-3 mx-3">
                         <div className="mx-1">flowering</div>
                     </div>
+                </Col>
+                <Col className="col-3 p-2">
 
-                    <div className="row dot sow mx-5">
+                    <div className="row dot bg-sowing mx-3">
                         <div className="mx-1">sowing</div>
                     </div>
 
@@ -37,10 +41,10 @@ export function TimelineCompParent({plants, months}) {
             </Row>
 
 
-            <Row>
+            <Row className={"g-0"}>
 
 
-                <Col className="col-1 col-border">
+                <Col className="col-2 col-border">
                     <div className="col-header ">
                         <Col>name</Col>
                     </div>
@@ -48,9 +52,9 @@ export function TimelineCompParent({plants, months}) {
                 </Col>
 
 
-                <Col className="col-11">
+                <Col className="col-10">
 
-                    <Row className="year-grid">
+                    <Row className="year-grid g-0">
 
                         {months.map((month) => (
                             <Col key={month} className="col-border">
@@ -61,12 +65,12 @@ export function TimelineCompParent({plants, months}) {
                 </Col>
             </Row>
 
-            <Row>
+            <Row className={"g-0"}>
 
                 {plants.map(item =>
                     <React.Fragment key={item.id}>
 
-                        <Col className="col-1 col-border">
+                        <Col className="col-2 col-border">
                             <div key={item.id + '-' + item.name} className="pt-3 overflow-auto">
                                 {item.name}
                             </div>
@@ -76,8 +80,8 @@ export function TimelineCompParent({plants, months}) {
                         </Col>
 
 
-                        <Col className="col-11">
-                            <Row className="year-grid">
+                        <Col className="col-10">
+                            <Row className="year-grid g-0">
                                 {months.map((month, index) => (
                                     <Col key={month + '-' + index} className="col-border pt-2 col-border-top">
                                         <TimelineComponent plant={item} MONTHS={months} month={month}/>
@@ -115,7 +119,7 @@ export function TimelineComponent({plant, MONTHS, month}) {
 
                         <div key={plant.id + 'sowing'} className="mb-2">
                             {shouldShowDot(plant.sowing, subcolNumber)
-                                ? (<div className="dot sow"></div>)
+                                ? (<div className="dot bg-sowing"></div>)
                                 : (<div className="dot invisible"></div>)
                             }
                         </div>
@@ -124,7 +128,7 @@ export function TimelineComponent({plant, MONTHS, month}) {
 
                         <div key={plant.id + 'harvest'} className="mb-2">
                             {shouldShowDot(plant.harvest, subcolNumber)
-                                ? (<div className="dot harvest"></div>)
+                                ? (<div className="dot bg-harvesting"></div>)
                                 : (<div className="dot invisible"></div>)
                             }
                         </div>
@@ -133,7 +137,7 @@ export function TimelineComponent({plant, MONTHS, month}) {
 
                         <div key={plant.id + 'planting'} className="mb-2">
                             {shouldShowDot(plant.planting, subcolNumber)
-                                ? (<div className="dot plant"></div>)
+                                ? (<div className="dot bg-planting"></div>)
                                 : (<div className="dot invisible"></div>)
                             }
                         </div>
@@ -142,7 +146,7 @@ export function TimelineComponent({plant, MONTHS, month}) {
 
                         <div key={plant.id + 'bloom'} className="mb-2">
                             {shouldShowDot(plant.bloom, subcolNumber)
-                                ? (<div className="dot bloom"></div>)
+                                ? (<div className="dot bg-flowering"></div>)
                                 : (<div className="dot invisible"></div>)
                             }
                         </div>
