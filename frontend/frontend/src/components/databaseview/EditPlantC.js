@@ -394,7 +394,7 @@ export function EditPlantC({plant, afterSubmit, reload}) {
             )}
             <Row>
                 <div className="text-center">
-                    <Button className="mb-2 custom-button text-black" onClick={handleSubmit}>save</Button>
+                    <Button className="mb-2 custom-button text-black" data-bs-dismiss="modal" data-bs-target="#editModal" onClick={handleSubmit}>save</Button>
                 </div>
             </Row>
         </>

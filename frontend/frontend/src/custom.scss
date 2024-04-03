@@ -1,0 +1,70 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+
+$body-bg: #8CBAAE;
+$body-color: #343a40;
+
+
+$style-colors: (
+        "sage": #8CBAAE,
+        "sage-light": #c6dcd6,
+        "plum": #5d576b,
+        "buttery": #d7e9af,
+        "peachy": #f18c7e
+);
+$action-colors: (
+        "sowing": #674b37,
+        "planting": #5c809e,
+        "harvesting": #a77f1c,
+        "flowering": #9a4179
+);
+$custom-colors: map-merge($action-colors, $style-colors);
+$theme-colors: map-merge($theme-colors, $custom-colors);
+$table-variants:map-merge($table-variants, $custom-colors);
+
+
+$border-time-table: #F5F2E966;
+
+$container-bg: rgba(map-get($custom-colors, "sage-light"), 0.2);
+
+$container-max-widths: (
+        sm: 1000px,
+        md: 1002px,
+        lg: 1003px,
+        xl: 1140px,
+        xxl: 1320px
+);
+
+$navbar-light-active-color: map-get($custom-colors, "sage");
+
+@import "~bootstrap/scss/bootstrap";
+
+.container-style {
+  background: $container-bg;
+  border-radius: 8px;
+}
+
+@media (max-device-width: 950px) {
+
+  .container {
+    min-width: 100% !important;
+  }
+
+}
+
+
+.nav-style {
+  color: map-get($custom-colors, "sage");
+}
+
+.col-border {
+  border-right: 2px dotted $border-time-table;
+}
+
+.col-border-top {
+  border-top: 2px solid $border-time-table;
+}
+
+

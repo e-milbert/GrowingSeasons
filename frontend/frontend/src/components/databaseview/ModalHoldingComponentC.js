@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {Col, Modal, Row} from "react-bootstrap";
 import {plantDeletePlant, plantGetSingleById} from "../../constants/apiConstants";
 import {EditPlantC} from "./EditPlantC";
 import {LoadingAnimation} from "../shared/LoadingAnimation";
@@ -71,59 +70,62 @@ export function ModalHoldingComponentC({data, reload}) {
 
     return (
         <>
+
             <button
-                className="edit-button"
+                className="btn btn-mini bg-transparent fs-5 m-0 p-0"
                 type="button"
-                onClick={() => setShow(true)}>
-                <i className='bx bx-pencil edit-pen-color'></i>
+                data-bs-toggle="modal"
+                data-bs-target="#editModal">
+                <i className='bx bx-pencil'></i>
             </button>
 
-            <Modal
-                scrollable={true}
-                size="lg"
-                show={Show}
-                onHide={() => handleHide(false)}
-                fullscreen={true}
-                aria-labelledby="planteditor"
-                dialogClassName="modal-custom-bg">
 
-                <Modal.Header closeButton>
-                    <Modal.Title id="planteditor">
+            <div className="modal fade" tabIndex="-1" aria-labelledby="planteditor" id={"editModal"} aria-hidden="true">
 
-                        Edit
+                <div className={"modal-dialog modal-fullscreen modal-dialog-scrollable "}>
+
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="planteditor">
+                                Edit
+                            </h5>
+
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
+
+                        </div>
 
 
-                    </Modal.Title>
+                        <div className="modal-body">
 
-                </Modal.Header>
-
-                <Modal.Body>
-
-                    <>
-
-                        {isLoading ? (
-                            <Row className="min-vh-100 d-flex justify-content-center align-items-center">
-                                <Col className="d-flex justify-content-center align-items-center">
-                                    <LoadingAnimation/>
-                                </Col>
-
-                            </Row>
-                        ) : (
                             <>
-                                <div className="text-end">
-                                    <button className="custom-button rounded-3" onClick={deleteSingleEntry}>delete
-                                    </button>
-                                </div>
-                                <EditPlantC plant={formData} afterSubmit={setShow} reload={reload}/>
+
+                                {isLoading ? (
+                                    <div className="row min-vh-100 d-flex justify-content-center align-items-center">
+                                        <div className=" col d-flex justify-content-center align-items-center">
+                                            <LoadingAnimation/>
+                                        </div>
+
+                                    </div>
+                                ) : (
+                                    <>
+                                        <div className="text-end">
+                                            <button className="custom-button rounded-3"
+                                                    onClick={deleteSingleEntry}>delete
+                                            </button>
+                                        </div>
+                                        <EditPlantC plant={formData} afterSubmit={setShow} reload={reload}/>
+                                    </>
+                                )}
+
                             </>
-                        )}
 
-                    </>
+                        </div>
+                    </div>
 
-                </Modal.Body>
-
-            </Modal>
+                </div>
+            </div>
         </>
+
     )
 
 

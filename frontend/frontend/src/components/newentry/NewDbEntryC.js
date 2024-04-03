@@ -365,7 +365,7 @@ const [showHint,setShowHint]=useState(false);
                 </Row>
             ) : (
                 <>
-                    <Container className="bg-container rounded-3 text-center px-1 py-5">
+                    <Container className="container-style text-center px-1 py-5">
                         <Row className="text-center">
                             <h3>new database entry</h3>
                         </Row>

@@ -56,17 +56,17 @@ export function Dashboard() {
                         <InformationC/>
                         <div className="row g-5 mt-3">
 
-                            <div className={"col col-md-12 col-lg-6"}>
+                            <div className={"col col-md-12 col-lg-6 col-sm-12"}>
 
-                                <div className="container">
+                                <div className="container border border-1 border-sage-light rounded-3 p-3">
                                     <SingleMonthTimeLine timelinePlants={allTimes} monthFilter={monName}
                                                          actionKey={"sowing"}/>
                                 </div>
                             </div>
 
-                            <div className={"col col-md-12 col-lg-6"}>
+                            <div className={"col col-md-12 col-lg-6 col-sm-12"}>
 
-                                <div className="container">
+                                <div className="container  border border-1 border-sage-light rounded-3 p-3">
                                     <SingleMonthTimeLine timelinePlants={allTimes} monthFilter={monName}
                                                          actionKey={"planting"}/>
                                 </div>
@@ -75,18 +75,18 @@ export function Dashboard() {
 
 
 
-                            <div className={"col col-md-12 col-lg-6"}>
+                            <div className={"col col-md-12 col-lg-6 col-sm-12"}>
 
-                                <div className="container">
+                                <div className="container  border border-1 border-sage-light rounded-3 p-3">
                                     <SingleMonthTimeLine timelinePlants={allTimes} monthFilter={monName}
                                                          actionKey={"harvest"}/>
                                 </div>
 
                             </div>
 
-                            <div className={"col col-md-12 col-lg-6"}>
+                            <div className={"col col-md-12 col-lg-6 col-sm-12"}>
 
-                                <div className="container">
+                                <div className="container  border border-1 border-sage-light rounded-3 p-3">
                                     <SingleMonthTimeLine timelinePlants={allTimes} monthFilter={monName}
                                                          actionKey={"bloom"}/>
                                 </div>
