@@ -1,9 +1,8 @@
-import {Col, Row} from "react-bootstrap";
 import React from "react";
 
 export function TimelineCompParent({plants, months}) {
     return (
-        <div>
+        <div className={"sm-scroll"}>
 
             <div className="row text-center"><h3>timeline</h3></div>
             <div id="legend" className="row my-1">
@@ -41,58 +40,59 @@ export function TimelineCompParent({plants, months}) {
             </div>
 
 
-            <div className={"row g-0"}>
+                <div className={"row g-0"}>
 
 
-                <div className="col col-2 col-border">
-                    <div className="col-header ">
-                        <div className={"col"}>name</div>
+                    <div className="col col-sm-2 col-border">
+                        <div className="col-header ">
+                            <div className={"col"}>name</div>
+                        </div>
+
                     </div>
 
+
+                    <div className="col col-sm-10">
+
+                        <div className="row year-grid g-0">
+
+                            {months.map((month) => (
+                                <div key={month} className=" col col-border">
+
+                                    <div className="text-sage-light col-header">{month.toUpperCase()}</div>
+                                </div>))}
+                        </div>
+                    </div>
                 </div>
 
+                <div className={"row g-0"}>
 
-                <div className="col col-10">
+                    {plants.map(item =>
+                        <React.Fragment key={item.id}>
 
-                    <div className="row year-grid g-0">
+                            <div className="col col-sm-2 col-border text-start">
+                                <div key={item.id + '-' + item.name} className="pt-3 text-break">
+                                    {item.name}
+                                </div>
+                                <div key={item.id + '-' + item.officialName} className="text-break">
+                                    {item.officialName}
+                                </div>
+                            </div>
 
-                        {months.map((month) => (
-                            <div key={month} className=" col col-border">
 
-                                <div className="col-header ">{month.toUpperCase()}</div>
-                            </div>))}
-                    </div>
+                            <div className="col col-sm-10">
+                                <div className="row year-grid g-0 ">
+                                    {months.map((month, index) => (
+                                        <div key={month + '-' + index} className="col col-border pt-2 col-border-top">
+                                            <TimelineComponent plant={item} MONTHS={months} month={month}/>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </React.Fragment>
+                    )}
                 </div>
             </div>
 
-            <div className={"row g-0"}>
-
-                {plants.map(item =>
-                    <React.Fragment key={item.id}>
-
-                        <div className="col col-2 col-border text-start">
-                            <div key={item.id + '-' + item.name} className="pt-3 overflow-auto">
-                                {item.name}
-                            </div>
-                            <div key={item.id + '-' + item.officialName} className="overflow-auto">
-                               {item.officialName}
-                            </div>
-                        </div>
-
-
-                        <div className="col col-10">
-                            <div className="row year-grid g-0">
-                                {months.map((month, index) => (
-                                    <div key={month + '-' + index} className="col col-border pt-2 col-border-top">
-                                        <TimelineComponent plant={item} MONTHS={months} month={month}/>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </React.Fragment>
-                )}
-            </div>
-        </div>
 
     )
 
