@@ -2,7 +2,6 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
-
 $body-bg: #8CBAAE;
 $body-color: #343a40;
 
@@ -27,9 +26,23 @@ $table-variants:map-merge($table-variants, $custom-colors);
 
 $border-time-table: #F5F2E966;
 
+$navbar-light-active-color: map-get($custom-colors, "sage");
+
 $container-bg: rgba(map-get($custom-colors, "sage-light"), 0.2);
 
+// Define custom breakpoints with a new 'xs' for small devices
+$grid-breakpoints: (
+        xs: 0,
+        sm: 0px,
+        md: 576px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1400px
+);
+
+// Adjust the $container-max-widths if necessary
 $container-max-widths: (
+        xs: 100%,  // Ensure the container is full width for xs
         sm: 1000px,
         md: 1002px,
         lg: 1003px,
@@ -37,10 +50,10 @@ $container-max-widths: (
         xxl: 1320px
 );
 
-$navbar-light-active-color: map-get($custom-colors, "sage");
+
 
 @import "~bootstrap/scss/bootstrap";
-
+@include make-grid-columns();
 .container-style {
   background: $container-bg;
   border-radius: 8px;
@@ -67,4 +80,27 @@ $navbar-light-active-color: map-get($custom-colors, "sage");
   border-top: 2px solid $border-time-table;
 }
 
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-content: center;
 
+}
+@media (max-width: 575px) {
+  .year-grid {
+    grid-template-columns: repeat(12, minmax(60px, 1fr)); /* Ensures a minimum width of 50px per column before scrolling */
+  }
+}
+
+@media (max-width: 575px) {
+  .sm-scroll {
+    overflow-x: scroll;
+  }
+}
+
+.mon-grid {
+  display: grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  align-content: center;
+
+}
