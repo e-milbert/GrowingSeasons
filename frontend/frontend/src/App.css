@@ -106,7 +106,7 @@ body {
 
 }
 
-.scrollbar-custom::-webkit-scrollbar {
+/*.scrollbar-custom::-webkit-scrollbar {
     width: 10px;
     background: rgba(228, 231, 228, 0.25);
     border-radius: 5px;
@@ -152,7 +152,7 @@ html, body {
 .cursor-pointer {
     cursor: pointer !important;
 }
-
+*/
 
 /*navigation
 
@@ -216,16 +216,25 @@ html, body {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     align-content: center;
-    color: rgb(228, 231, 228);
-    padding-left: 1px;
-    padding-right: 1px;
+
+}
+@media (max-width: 575px) {
+    .year-grid {
+        grid-template-columns: repeat(12, minmax(60px, 1fr)); /* Ensures a minimum width of 50px per column before scrolling */
+    }
+}
+
+@media (max-width: 575px) {
+    .sm-scroll {
+        overflow-x: scroll;
+    }
 }
 
 .mon-grid {
     display: grid;
     grid-template-columns:repeat(4, minmax(0, 1fr));
     align-content: center;
-    padding-left: 1px;
+
 }
 
 
