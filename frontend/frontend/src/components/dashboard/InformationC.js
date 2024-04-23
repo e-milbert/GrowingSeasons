@@ -107,7 +107,7 @@ export function InformationC() {
                 </div>
             ) : (
 
-                <div className={"rounded-3 pt-4"}>
+                <div className={"rounded-3 pt-4 d-none d-md-block"}>
 
                     <div id="weatherForecast" className="carousel carousel-dark slide"
                          data-bs-ride="carousel">
@@ -123,8 +123,8 @@ export function InformationC() {
 
                             <img src={sunnycloud} className="d-block w-100" alt="sun and clouds in the sky"/>
 
-                            <div className="carousel-item active" data-bs-interval="8000">
-                                <div className="carousel-caption d-none d-md-block">
+                            <div className="carousel-item active " data-bs-interval="8000">
+                                <div className="carousel-caption ">
 
                                     <h4>{date} {currentWeather["time"]}</h4>
 
