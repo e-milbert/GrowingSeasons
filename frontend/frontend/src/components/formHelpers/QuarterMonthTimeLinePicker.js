@@ -12,7 +12,7 @@ export function QuarterMonthTimeLinePicker2({actionName, onChange}) {
                 ? prevTimeLine.filter(item => item !== subcolNumber)
                 : [...prevTimeLine, subcolNumber];
 
-            onChange(newTimeLine);  // Now using the updated timeline
+            onChange(newTimeLine);
             return newTimeLine;
         });
     };
@@ -22,47 +22,48 @@ export function QuarterMonthTimeLinePicker2({actionName, onChange}) {
     };
 
     return (
-        <Container className="container-bg-secondary rounded-3 p-3 mb-2">
-            <Row className="flex-fill">
-                <Col className="col-1 col-border">
+        <div className="container container-bg-secondary rounded-3 p-3 mb-2">
+            <div className="row flex-fill">
+                <div className="col col-1 col-border">
                     <div className="col-header  mt-3">
                         {actionName}
                     </div>
-                </Col>
+                </div>
 
-                <Col className="col-11">
-                    <Row className="year-grid">
+                <div className="col col-11">
+                    <div className="row year-grid">
                         {monthsShort.map((month, monthIndex) => {
                             const startSubcol = monthIndex * 4 + 1;
                             const endSubcol = startSubcol + 3;
 
                             return (
 
-                                <Col key={month} className="col-border">
+                                <div key={month} className="col col-border">
                                     <div className="col-header mb-0">{month.toUpperCase()}</div>
-                                    <Row>
+                                    <div className={"row"}>
                                         {[startSubcol, startSubcol + 1, startSubcol + 2, endSubcol].map(subcolNumber => (
-                                            <Col key={subcolNumber} className="my-1 col-border-top mx-0 p-0">
-                                                <Button
+                                            <div key={subcolNumber} className="col my-1 col-border-top mx-0 p-0">
+                                                <button
                                                     className={getButtonStyle(subcolNumber)}
                                                     onClick={() => addActionToTimeLine(subcolNumber)}
 
                                                     type="button">
 
-                                                </Button>
-                                            </Col>
+                                                </button>
+                                            </div>
                                         ))}
-                                    </Row>
-                                </Col>
+                                    </div>
+                                </div>
                             );
                         })}
-                    </Row>
-                </Col>
-            </Row>
-        </Container>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 
+//TODO need to fix duplication;
 
 export function QuarterMonthTimeLinePickerEdit({actionName, onChange, preselected}) {
     const [timeLine, setTimeLine] = useState(preselected);
@@ -74,7 +75,7 @@ export function QuarterMonthTimeLinePickerEdit({actionName, onChange, preselecte
                 ? prevTimeLine.filter(item => item !== subcolNumber)
                 : [...prevTimeLine, subcolNumber];
 
-            onChange(newTimeLine);  // Now using the updated timeline
+            onChange(newTimeLine);
             return newTimeLine;
         });
     };
@@ -84,43 +85,43 @@ export function QuarterMonthTimeLinePickerEdit({actionName, onChange, preselecte
     };
 
     return (
-        <Container className="container-bg-secondary rounded-3 p-3 mb-2">
-            <Row className="flex-fill">
-                <Col className="col-1 col-border">
+        <div className="container container-bg-secondary rounded-3 p-3 mb-2">
+            <div className="row flex-fill">
+                <div className="colcol-1 col-border">
                     <div className="col-header  mt-3">
                         {actionName}
                     </div>
-                </Col>
+                </div>
 
-                <Col className="col-11">
-                    <Row className="year-grid">
+                <div className="col col-11">
+                    <div className="row year-grid">
                         {monthsShort.map((month, monthIndex) => {
                             const startSubcol = monthIndex * 4 + 1;
                             const endSubcol = startSubcol + 3;
 
                             return (
 
-                                <Col key={month} className="col-border">
+                                <div key={month} className="colcol-border">
                                     <div className="col-header mb-0">{month.toUpperCase()}</div>
-                                    <Row>
+                                    <div className={"row"}>
                                         {[startSubcol, startSubcol + 1, startSubcol + 2, endSubcol].map(subcolNumber => (
-                                            <Col key={subcolNumber} className="my-1 col-border-top mx-0 p-0">
-                                                <Button
+                                            <div key={subcolNumber} className="col my-1 col-border-top mx-0 p-0">
+                                                <button
                                                     className={getButtonStyle(subcolNumber)}
                                                     onClick={() => addActionToTimeLine(subcolNumber)}
 
                                                     type="button">
 
-                                                </Button>
-                                            </Col>
+                                                </button>
+                                            </div>
                                         ))}
-                                    </Row>
-                                </Col>
+                                    </div>
+                                </div>
                             );
                         })}
-                    </Row>
-                </Col>
-            </Row>
-        </Container>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
