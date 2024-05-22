@@ -255,6 +255,12 @@ export function EditPlantC({plant, afterSubmit, reload}) {
         }
         setMinGerm(value);
     }
+    const handleMaxGermination=(value)=>{
+        if(value<minGerm){
+            setMinGerm(value);
+        }
+        setMaxGerm(value);
+    }
 
 
     return (
@@ -272,7 +278,7 @@ export function EditPlantC({plant, afterSubmit, reload}) {
                                     <Col>
                                         <OneLineFormC
                                             idName="name1"
-                                            labelText="Common Name"
+                                            labelText="Name"
                                             placeholderText={plant.commonName}
                                             handleInputChangeFunction={setCommonName}/>
                                     </Col>
@@ -371,7 +377,7 @@ export function EditPlantC({plant, afterSubmit, reload}) {
                                                       labelText="min temperature" placeholderText={minGerm}/>
                                     </Col>
                                     <Col>
-                                        <OneLineFormC idName="germmax" handleInputChangeFunction={setMaxGerm}
+                                        <OneLineFormC idName="germmax" handleInputChangeFunction={handleMaxGermination}
                                                       labelText="max temperature" placeholderText={maxGerm}/>
                                     </Col>
                                 </Row>
