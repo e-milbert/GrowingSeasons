@@ -22,10 +22,10 @@ export function QuarterMonthTimeLinePicker2({actionName, onChange}) {
     };
 
     return (
-        <div className="container container-bg-secondary rounded-3 p-3 mb-2">
+        <div className="container bg-transparent rounded-3 p-3 mb-2 d-flex">
             <div className="row flex-fill">
-                <div className="col col-1 col-border">
-                    <div className="col-header  mt-3">
+                <div className="col p-1 col-1 col-border">
+                    <div className="col-header mt-3">
                         {actionName}
                     </div>
                 </div>
@@ -85,9 +85,9 @@ export function QuarterMonthTimeLinePickerEdit({actionName, onChange, preselecte
     };
 
     return (
-        <div className="container container-bg-secondary rounded-3 p-3 mb-2">
+        <div className="container bg-transparent rounded-3 p-3 mb-2 d-flex">
             <div className="row flex-fill">
-                <div className="colcol-1 col-border">
+                <div className="col p-1 col-1 col-border">
                     <div className="col-header  mt-3">
                         {actionName}
                     </div>
@@ -101,7 +101,7 @@ export function QuarterMonthTimeLinePickerEdit({actionName, onChange, preselecte
 
                             return (
 
-                                <div key={month} className="colcol-border">
+                                <div key={month} className="col col-border">
                                     <div className="col-header mb-0">{month.toUpperCase()}</div>
                                     <div className={"row"}>
                                         {[startSubcol, startSubcol + 1, startSubcol + 2, endSubcol].map(subcolNumber => (
