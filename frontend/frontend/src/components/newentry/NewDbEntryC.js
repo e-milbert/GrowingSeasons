@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import {OneLineFormC} from "../formHelpers/OneLineFormC";
 import {DynamicDropdown, DynamicSingleValueChoiceDropdown} from "../formHelpers/McDropdownC";
@@ -9,7 +9,6 @@ import {
     colorsPostColor,
     exposureGetAllExposures,
     exposurePostExposure,
-    germinationGetAllGerminations,
     growthGetAllGrowth,
     growthPostGrowth,
     plantPostPlant,
@@ -62,16 +61,16 @@ export function NewDbEntryC() {
 
     const [minGerm, setMinGerm] = useState()
     const [maxGerm, setMaxGerm] = useState()
-const [showHint,setShowHint]=useState(false);
-    const germination={
-        minGerminationTemp:minGerm,
-        maxGerminationTemp:maxGerm
+    const [showHint, setShowHint] = useState(false);
+    const germination = {
+        minGerminationTemp: minGerm,
+        maxGerminationTemp: maxGerm
     }
 
     useEffect(() => {
-        if(minGerm>maxGerm){
+        if (minGerm > maxGerm || maxGerm < minGerm) {
             setShowHint(true);
-        }else {
+        } else {
             setShowHint(false)
         }
     }, [minGerm, maxGerm]);
@@ -107,21 +106,21 @@ const [showHint,setShowHint]=useState(false);
             });
     }, [refetch]);
 
-    const handleMinGermination=(value)=>{
+    const handleMinGermination = (value) => {
         setMinGerm(value);
 
         if (value > maxGerm) {
             setMaxGerm(value);
         }
-        console.log( minGerm, maxGerm)
+        console.log(minGerm, maxGerm)
     }
-    const handleMaxGermination=(value)=>{
+    const handleMaxGermination = (value) => {
         setMaxGerm(value);
 
         if (value < minGerm) {
             setMinGerm(value);
         }
-        console.log( minGerm, maxGerm)
+        console.log(minGerm, maxGerm)
     }
 
 
@@ -178,16 +177,13 @@ const [showHint,setShowHint]=useState(false);
             });
 
             if (response.ok) {
-                // The POST request was successful, data is in the database
                 setRefetch(true);
                 setShowNewExposure(false);
             } else {
-                // Handle non-OK response status (e.g., display an error message)
                 console.error('Failed to post:', response.status);
                 setShowNewExposure(false);
             }
         } catch (error) {
-            // Handle any network or fetch-related errors
             console.error('Error:', error);
             setShowNewExposure(false);
         }
@@ -234,16 +230,13 @@ const [showHint,setShowHint]=useState(false);
             });
 
             if (response.ok) {
-                // The POST request was successful, data is in the database
                 setRefetch(true);
                 setShowNewColor(false);
             } else {
-                // Handle non-OK response status (e.g., display an error message)
                 console.error('Failed to post:', response.status);
                 setShowNewColor(false);
             }
         } catch (error) {
-            // Handle any network or fetch-related errors
             console.error('Error:', error);
             setShowNewColor(false);
         }
@@ -357,171 +350,177 @@ const [showHint,setShowHint]=useState(false);
     return (
         <>
             {isLoading ? (
-                <Row className="min-vh-100 d-flex justify-content-center align-items-center">
-                    <Col className="d-flex justify-content-center align-items-center">
+                <div className="row min-vh-100 d-flex justify-content-center align-items-center">
+                    <div className="col d-flex justify-content-center align-items-center">
                         <LoadingAnimation/>
-                    </Col>
+                    </div>
 
-                </Row>
+                </div>
             ) : (
                 <>
-                    <Container className="container-style text-center px-1 py-5">
-                        <Row className="text-center">
-                            <h3>new database entry</h3>
-                        </Row>
-
-                        <Form className="p-4">
-                            <div className="mb-4">
-                                <Row>
-                                    <Col>
-                                        <OneLineFormC
-                                            idName="name1"
-                                            labelText="Common Name"
-                                            placeholderText=""
-                                            handleInputChangeFunction={setCommonName}/>
-                                    </Col>
-                                    <Col>
-                                        <OneLineFormC
-                                            idName="name2"
-                                            labelText="Official Name"
-                                            placeholderText=""
-                                            handleInputChangeFunction={setOfficialName}/>
-                                    </Col>
-                                </Row>
+                    <div>
+                        <div className="container container-style p-1  sm-scroll">
+                            <div className="row text-center">
+                                <h3>new database entry</h3>
                             </div>
 
-                            <div className="mb-4">
-                                <div className="d-flex justify-content-start">
-                                    <div className="px-3 my-2">
-                                        <Form.Check
-                                            type="checkbox"
-                                            label="Edible"
-                                            checked={isEdible || false}
-                                            onChange={handleEdible}
-                                            name="checkboxEdible"
-
-                                        />
+                            <div className="p-4">
+                                <div className="mb-4">
+                                    <div className={"row"}>
+                                        <div className={"col"}>
+                                            <OneLineFormC
+                                                idName="name1"
+                                                labelText="Common Name"
+                                                placeholderText=""
+                                                handleInputChangeFunction={setCommonName}/>
+                                        </div>
+                                        <div className={"col"}>
+                                            <OneLineFormC
+                                                idName="name2"
+                                                labelText="Official Name"
+                                                placeholderText=""
+                                                handleInputChangeFunction={setOfficialName}/>
+                                        </div>
                                     </div>
-                                    <div className="px-3 my-2">
-                                        <Form.Check
-                                            type="checkbox"
-                                            label="Ornamental"
-                                            checked={isOrnamental || false}
-                                            onChange={handleOrnamental}
-                                            name="checkboxOrnamental"
-
-                                        /></div>
-                                    <div className="px-3 my-2">
-                                        <Form.Check
-                                            type="checkbox"
-                                            label="Poisonous"
-                                            checked={isPoisonous || false}
-                                            onChange={handlePoisonous}
-                                            name="checkboxPoisonous"
-
-                                        /></div>
-                                </div>
-                            </div>
-
-                            <div className="mb-4">
-
-                                <DynamicDropdown bxIcon="bx bxs-florist mx-3"
-                                                 key="color"
-                                                 dropdownname="color"
-                                                 data={allcolors}
-                                                 valueKey="name"
-                                                 onSelectedOptionsChange={setChosenColors}
-                                                 onAddingNew={() => setShowNewColor(true)}/>
-
-                                {showNewColor &&
-                                    <AddAttributeModal isShowing={showNewColor} setIsShowing={setShowNewColor}
-                                                       setDataCallback={handleNewColor} typeName={"color"}
-                                                       validationType={"string"}/>
-                                }
-
-                                <DynamicDropdown bxIcon="bx bx-sun mx-3"
-                                                 key="expo"
-                                                 dropdownname="exposure"
-                                                 data={allExposures}
-                                                 valueKey="type"
-                                                 onSelectedOptionsChange={setChosenExposures}
-                                                 onAddingNew={() => setShowNewExposure(true)}/>
-                                {showNewExposure &&
-                                    <AddAttributeModal isShowing={showNewExposure} setIsShowing={setShowNewExposure}
-                                                       setDataCallback={handleAddNewExposure}
-                                                       typeName={"exposure type"} validationType={"string"}/>
-                                }
-
-                                <DynamicDropdown bxIcon="bx bx-vertical-bottom mx-3"
-                                                 key="soil"
-                                                 dropdownname="soil"
-                                                 data={allSoils}
-                                                 valueKey="type"
-                                                 onSelectedOptionsChange={setChosenSoils}
-                                                 onAddingNew={() => setShowNewSoil(true)}/>
-                                {showNewSoil &&
-                                    <AddAttributeModal isShowing={showNewSoil} setIsShowing={setShowNewSoil}
-                                                       setDataCallback={handleAddNewSoil} typeName={"soil type"}
-                                                       validationType={"string"}/>
-                                }
-
-
-                            </div>
-
-                            <div className="mb-4">
-
-                                <DynamicSingleValueChoiceDropdown bxIcon="bx bx-up-arrow-alt mx-3"
-                                                                  data={allSizes} valueKey="size"
-                                                                  onSelectedOptionsChange={setHeightSize}
-                                                                  dropdownname="height"
-                                                                  onAddingNew={() => setShowNewGrowth(true)}/>
-
-
-                                <DynamicSingleValueChoiceDropdown bxIcon="bx bx-right-arrow-alt mx-3"
-                                                                  data={allSizes}
-                                                                  valueKey="size"
-                                                                  onSelectedOptionsChange={setWidthSize}
-                                                                  dropdownname="width"
-                                                                  onAddingNew={() => setShowNewGrowth(true)}/>
-
-                                {showNewGrowth &&
-                                    <AddAttributeModal isShowing={showNewGrowth} setIsShowing={setShowNewGrowth}
-                                                       setDataCallback={handleAddNewGrowth} typeName={"size"}
-                                                       validationType={"number"}/>
-                                }
-
-                            </div>
-                            <div className="mb-4">
-                                <Row>
-                                    <h5 className="text-start m-3">germination temperature</h5>
-                                    <Col>
-                                        <OneLineFormC idName="germmin" handleInputChangeFunction={setMinGerm}
-                                                      labelText="min temperature" placeholderText={""}/>
-                                    </Col>
-                                    <Col>
-                                        <OneLineFormC idName="germmax" handleInputChangeFunction={setMaxGerm}
-                                                      labelText="max temperature" placeholderText={""}/>
-                                    </Col>
-                                </Row>
-                                {showHint&&
-                                    <Row className={"text-center"}>
-                                    <div className={"fs-6 text-white-50 text-center fw-light"}>please check your temperatures again</div>
-
-                                    </Row>
-                                }
                                 </div>
 
+                                <div className="mb-4">
+                                    <div className="d-flex justify-content-start">
+                                        <div className="px-3 my-2">
+                                            <Form.Check
+                                                type="checkbox"
+                                                label="Edible"
+                                                checked={isEdible || false}
+                                                onChange={handleEdible}
+                                                name="checkboxEdible"
 
-                            <div className="mb-4">
-                                <QuarterMonthTimeLinePicker2 actionName="sow" onChange={setSowingTimes}/>
-                                <QuarterMonthTimeLinePicker2 actionName="plant" onChange={setPlantingTimes}/>
-                                <QuarterMonthTimeLinePicker2 actionName="harvest" onChange={setHarvestingTimes}/>
-                                <QuarterMonthTimeLinePicker2 actionName="bloom" onChange={setBloomingTimes}/>
+                                            />
+                                        </div>
+                                        <div className="px-3 my-2">
+                                            <Form.Check
+                                                type="checkbox"
+                                                label="Ornamental"
+                                                checked={isOrnamental || false}
+                                                onChange={handleOrnamental}
+                                                name="checkboxOrnamental"
+
+                                            /></div>
+                                        <div className="px-3 my-2">
+                                            <Form.Check
+                                                type="checkbox"
+                                                label="Poisonous"
+                                                checked={isPoisonous || false}
+                                                onChange={handlePoisonous}
+                                                name="checkboxPoisonous"
+
+                                            /></div>
+                                    </div>
+                                </div>
+
+                                <div className="mb-4">
+
+                                    <DynamicDropdown bxIcon="bx bxs-florist mx-3"
+                                                     key="color"
+                                                     dropdownname="color"
+                                                     data={allcolors}
+                                                     valueKey="name"
+                                                     onSelectedOptionsChange={setChosenColors}
+                                                     onAddingNew={() => setShowNewColor(true)}/>
+
+                                    {showNewColor &&
+                                        <AddAttributeModal isShowing={showNewColor} setIsShowing={setShowNewColor}
+                                                           setDataCallback={handleNewColor} typeName={"color"}
+                                                           validationType={"string"}/>
+                                    }
+
+                                    <DynamicDropdown bxIcon="bx bx-sun mx-3"
+                                                     key="expo"
+                                                     dropdownname="exposure"
+                                                     data={allExposures}
+                                                     valueKey="type"
+                                                     onSelectedOptionsChange={setChosenExposures}
+                                                     onAddingNew={() => setShowNewExposure(true)}/>
+                                    {showNewExposure &&
+                                        <AddAttributeModal isShowing={showNewExposure} setIsShowing={setShowNewExposure}
+                                                           setDataCallback={handleAddNewExposure}
+                                                           typeName={"exposure type"} validationType={"string"}/>
+                                    }
+
+                                    <DynamicDropdown bxIcon="bx bx-vertical-bottom mx-3"
+                                                     key="soil"
+                                                     dropdownname="soil"
+                                                     data={allSoils}
+                                                     valueKey="type"
+                                                     onSelectedOptionsChange={setChosenSoils}
+                                                     onAddingNew={() => setShowNewSoil(true)}/>
+                                    {showNewSoil &&
+                                        <AddAttributeModal isShowing={showNewSoil} setIsShowing={setShowNewSoil}
+                                                           setDataCallback={handleAddNewSoil} typeName={"soil type"}
+                                                           validationType={"string"}/>
+                                    }
+
+
+                                </div>
+
+                                <div className="mb-4">
+
+                                    <DynamicSingleValueChoiceDropdown bxIcon="bx bx-up-arrow-alt mx-3"
+                                                                      data={allSizes} valueKey="size"
+                                                                      onSelectedOptionsChange={setHeightSize}
+                                                                      dropdownname="height"
+                                                                      onAddingNew={() => setShowNewGrowth(true)}/>
+
+
+                                    <DynamicSingleValueChoiceDropdown bxIcon="bx bx-right-arrow-alt mx-3"
+                                                                      data={allSizes}
+                                                                      valueKey="size"
+                                                                      onSelectedOptionsChange={setWidthSize}
+                                                                      dropdownname="width"
+                                                                      onAddingNew={() => setShowNewGrowth(true)}/>
+
+                                    {showNewGrowth &&
+                                        <AddAttributeModal isShowing={showNewGrowth} setIsShowing={setShowNewGrowth}
+                                                           setDataCallback={handleAddNewGrowth} typeName={"size"}
+                                                           validationType={"number"}/>
+                                    }
+
+                                </div>
+                                <div className="mb-4">
+                                    <div className={"row "}>
+                                        <h5 className="text-start m-3">germination temperature</h5>
+                                        <div className={"col"}>
+                                            <OneLineFormC idName="germmin" handleInputChangeFunction={setMinGerm}
+                                                          labelText="min temperature" placeholderText={""}/>
+                                        </div>
+                                        <div className={"col"}>
+                                            <OneLineFormC idName="germmax" handleInputChangeFunction={setMaxGerm}
+                                                          labelText="max temperature" placeholderText={""}/>
+                                        </div>
+                                    </div>
+                                    {showHint &&
+                                        <div className={"row text-center"}>
+                                            <div className={"fs-6 text-white-50 text-center fw-light"}>please check your
+                                                temperatures again
+                                            </div>
+
+                                        </div>
+                                    }
+                                </div>
+
+
+                                <div className="mb-4 ">
+                                    <QuarterMonthTimeLinePicker2 actionName="sow" onChange={setSowingTimes}/>
+                                    <QuarterMonthTimeLinePicker2 actionName="plant" onChange={setPlantingTimes}/>
+                                    <QuarterMonthTimeLinePicker2 actionName="harvest" onChange={setHarvestingTimes}/>
+                                    <QuarterMonthTimeLinePicker2 actionName="bloom" onChange={setBloomingTimes}/>
+                                </div>
+
                             </div>
-
-                        </Form>
-                        <Button className="mb-2 custom-button text-black" onClick={handleSubmit}>save</Button>
-                    </Container>
+                            <div className="text-center">
+                                <Button className="mb-2 custom-button text-black" onClick={handleSubmit}>save</Button>
+                            </div>
+                        </div>
+                    </div>
                 </>
             )}
 
