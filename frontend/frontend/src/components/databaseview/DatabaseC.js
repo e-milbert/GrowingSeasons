@@ -179,7 +179,6 @@ export function DatabaseC({listOfData, headerMapping, reload}) {
             <div className={"col"}>
                 <OneLineFormC
                     labelText="search:"
-                    placeholderText=""
                     idName="search"
                     handleInputChangeFunction={handleSearch}
 
