@@ -47,7 +47,7 @@ export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdo
         <div className="d-flex my-2">
             <div>
                 <div className="d-flex justify-content-start">
-                    <Dropdown className="btn btn-sage-light rounded-2 text-start  crowbar fw-semibold">
+                    <Dropdown className="btn btn-sage-light rounded-2 text-start  btn-fixed-size fw-semibold">
                         <div className="">
                             <Dropdown.Toggle as="div" className="cursor-pointer w-100">
                                 <i className={bxIcon}></i>{dropdownname}
@@ -121,7 +121,7 @@ export function DynamicSingleValueChoiceDropdown({
         <div className="d-flex my-2">
             <div>
                 <div className="d-flex justify-content-start">
-                    <Dropdown className="btn btn-sage-light rounded-2  text-start crowbar">
+                    <Dropdown className="btn btn-sage-light rounded-2  text-start btn-fixed-size">
                         <div className="">
                             <Dropdown.Toggle as="div" className="cursor-pointer w-100">
                                 <i className={bxIcon}></i>{dropdownname}
@@ -197,7 +197,7 @@ export function DynamicDropdown2({data, valueKey, onSelectedOptionsChange, dropd
             <div className="d-flex my-2">
                 <div>
                     <div className="d-flex justify-content-start">
-                        <Dropdown className="btn btn-sage-light rounded-2  text-start crowbar">
+                        <Dropdown className="btn btn-sage-light rounded-2  text-start btn-fixed-size">
                             <div className="">
                                 <Dropdown.Toggle as="div" className="cursor-pointer w-100">
                                     <i className={bxIcon}></i>{dropdownname}
@@ -260,7 +260,7 @@ export function DynamicSingleValueChoiceDropdown2({
         <div className="d-flex my-2">
             <div>
                 <div className="d-flex justify-content-start">
-                    <Dropdown className="btn btn-sage-light rounded-2  text-start crowbar">
+                    <Dropdown className="btn btn-sage-light rounded-2  text-start btn-fixed-size">
                         <div className="">
                             <Dropdown.Toggle as="div" className="cursor-pointer w-100">
                                 <i className={bxIcon}></i>{dropdownname}
