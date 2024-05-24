@@ -517,7 +517,7 @@ export function NewDbEntryC() {
 
                             </div>
                             <div className="text-center">
-                                <Button className="mb-2 custom-button text-black" onClick={handleSubmit}>save</Button>
+                                <button type={"button"} className="mb-2 btn btn-sage-light custom-button text-black" onClick={handleSubmit}>save</button>
                             </div>
                         </div>
                     </div>

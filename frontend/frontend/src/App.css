@@ -9,27 +9,11 @@
 }
 
 
-/*checkbox*/
-input:focus {
-    outline: rgba(133, 173, 133, 0.5) !important;
-    box-shadow: 0 0 10px rgba(133, 173, 133, 0.5) !important;
-    border-color: transparent !important;
-    border: none;
-}
 
-.form-check-input {
-    color: rgb(228, 231, 228);
-}
-
-.form-check-input:checked {
-    background-color: rgb(133, 173, 133) !important;
-
-    border: none;
-}
 
 /*dropdown*/
 select:focus {
-    outline: rgba(133, 173, 133, 0.5) !important;
+  outline: rgba(133, 173, 133, 0.5) !important;
     box-shadow: none !important;
     border-color: transparent !important;
     border: none;
@@ -44,7 +28,7 @@ select:focus {
 }
 
 .selection-button:focus {
-    --bs-btn-focus-box-shadow: 0 0 0 0.25rem rgba(133, 173, 133, 0.5);
+    --bs-btn-focus-box-shadow: 0 0 0 0.9rem rgba(173, 133, 171, 0.9);
 }
 
 .dropdown-menu {
@@ -64,24 +48,6 @@ select:focus {
 }
 
 
-.custom-button:focus, .custom-button:hover {
-    outline: rgba(133, 173, 133, 0.5) !important;
-    box-shadow: rgba(133, 173, 133, 0.5) !important;
-    border-color: rgba(133, 173, 133, 0.5) !important;
-    border-width: 1px !important;
-    border-style: solid !important;
-    border: none !important;
-    background-color: rgb(133, 173, 133) !important;
-
-}
-
-.custom-button {
-    background-color: rgb(228, 231, 228) !important;
-    border-style: solid !important;
-    border: none !important;
-    border-color: rgb(228, 231, 228) !important;
-    font-weight: 500 !important;
-}
 
 
 /*body, containers, general
@@ -189,10 +155,12 @@ html, body {
 /*input*/
 
 
+/*
 .input-grp-label {
-    background-color: transparent !important;
+
+   background-color: transparent !important;
     color: rgb(228, 231, 228) !important;
-    border-color: rgb(228, 231, 228) !important;
+   border-color: red !important;
     border-width: 1px !important;
     border-style: solid !important;
     font-size: 16px !important;
@@ -207,7 +175,7 @@ html, body {
     border-style: solid !important;
     font-size: 18px !important;
 
-}
+}*/
 
 
 /*table grid*/
@@ -251,24 +219,6 @@ html, body {
     background-color: transparent;
 }
 
-/*modal
-
-.edit-pen-color {
-    color: rgb(228, 231, 228);
-}
-
-.modal-custom-bg {
-    --bs-modal-bg: rgba(19, 32, 19, 0.3) !important;
-    backdrop-filter: blur(5px) !important;
-}
-
-.btn-close {
-    --bs-btn-close-color: rgb(228, 231, 228) !important;
-    --bs-btn-close-focus-shadow: 0 0 0 0.25rem rgba(133, 173, 133, 0.25) !important;
-    --bs-btn-close-bg: url('images/arrow-back-regular-108.png') !important;
-    width: 20px !important;
-    height: 20px !important;
-}*/
 
 /*table carousel*/
 .table-bg-transp-blur {
@@ -278,32 +228,6 @@ html, body {
 }
 
 
-/*table
-
-.custom-table.table-striped > tbody > tr:nth-of-type(odd) > * {
-    background-color: rgb(60, 68, 60) !important;
-    color: rgb(228, 231, 228) !important;
-}
-
-.custom-table.table-striped > tbody > tr:nth-of-type(even) > * {
-    background-color: rgb(48, 54, 48) !important;
-    color: rgb(228, 231, 228) !important;
-}
-
-.custom-table {
-    font-size: 1em;
-    background-color: rgb(48, 54, 48) !important;
-    color: rgb(228, 231, 228) !important;
-}
-
-.custom-table.table-bordered td,
-.custom-table.table-bordered th {
-    border: 2px solid rgba(255, 250, 250, 0.2);
-}
-
-.custom-table.table-hover > tbody > tr:hover > * {
-    background-color: rgba(230, 230, 250, 0.2) !important;
-}*/
 
 /*carousel image*/
 .reduced-saturation {

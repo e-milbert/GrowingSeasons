@@ -47,7 +47,7 @@ export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdo
         <div className="d-flex my-2">
             <div>
                 <div className="d-flex justify-content-start">
-                    <Dropdown className="btn custom-button rounded-2  text-start crowbar fw-semibold">
+                    <Dropdown className="btn btn-sage-light rounded-2 text-start  crowbar fw-semibold">
                         <div className="">
                             <Dropdown.Toggle as="div" className="cursor-pointer w-100">
                                 <i className={bxIcon}></i>{dropdownname}
@@ -70,7 +70,7 @@ export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdo
 
                 {selectedOptions.map((item, index) => (<button
                     key={index}
-                    className="btn custom-button mx-2"
+                    className="btn btn-sage-light mx-2"
                     type="button"
                     onClick={() => handleRemove(item[valueKey])}
                 >
@@ -121,7 +121,7 @@ export function DynamicSingleValueChoiceDropdown({
         <div className="d-flex my-2">
             <div>
                 <div className="d-flex justify-content-start">
-                    <Dropdown className="btn custom-button rounded-2  text-start crowbar">
+                    <Dropdown className="btn btn-sage-light rounded-2  text-start crowbar">
                         <div className="">
                             <Dropdown.Toggle as="div" className="cursor-pointer w-100">
                                 <i className={bxIcon}></i>{dropdownname}
@@ -142,7 +142,7 @@ export function DynamicSingleValueChoiceDropdown({
             </div>
             <div className="col-10 d-flex justify-content-start">
                 {selectedOption && (<button
-                    className="btn custom-button mx-2 fw-semibold"
+                    className="btn btn-sage-light mx-2 fw-semibold"
                     type="button"
                     onClick={handleRemove}
                 >
@@ -197,7 +197,7 @@ export function DynamicDropdown2({data, valueKey, onSelectedOptionsChange, dropd
             <div className="d-flex my-2">
                 <div>
                     <div className="d-flex justify-content-start">
-                        <Dropdown className="btn custom-button rounded-2  text-start crowbar">
+                        <Dropdown className="btn btn-sage-light rounded-2  text-start crowbar">
                             <div className="">
                                 <Dropdown.Toggle as="div" className="cursor-pointer w-100">
                                     <i className={bxIcon}></i>{dropdownname}
@@ -218,7 +218,7 @@ export function DynamicDropdown2({data, valueKey, onSelectedOptionsChange, dropd
 
                     {selectedOptions.map((item, index) => (<button
                         key={index}
-                        className="btn custom-button mx-2"
+                        className="btn btn-sage-light mx-2"
                         type="button"
                         onClick={() => handleRemove(item[valueKey])}
                     >
@@ -260,7 +260,7 @@ export function DynamicSingleValueChoiceDropdown2({
         <div className="d-flex my-2">
             <div>
                 <div className="d-flex justify-content-start">
-                    <Dropdown className="btn custom-button rounded-2  text-start crowbar">
+                    <Dropdown className="btn btn-sage-light rounded-2  text-start crowbar">
                         <div className="">
                             <Dropdown.Toggle as="div" className="cursor-pointer w-100">
                                 <i className={bxIcon}></i>{dropdownname}
@@ -277,7 +277,7 @@ export function DynamicSingleValueChoiceDropdown2({
             </div>
             <div className="col-10 d-flex justify-content-start">
                 {selectedOption && (<button
-                    className="btn custom-button mx-2"
+                    className="btn btn-sage-light mx-2"
                     type="button"
                     onClick={handleRemove}
                 >

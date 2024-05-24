@@ -109,7 +109,7 @@ export function ModalHoldingComponentC({data, reload}) {
                                 ) : (
                                     <>
                                         <div className="text-end">
-                                            <button className="custom-button rounded-3"
+                                            <button className="btn btn-sage-light rounded-3"
                                                     onClick={deleteSingleEntry}>delete
                                             </button>
                                         </div>

@@ -30,17 +30,15 @@ $navbar-light-active-color: map-get($custom-colors, "sage");
 
 $container-bg: rgba(map-get($custom-colors, "sage-light"), 0.2);
 
-// Define custom breakpoints with a new 'xs' for small devices
 $grid-breakpoints: (
         xs: 0,
-        sm: 0px,
+        sm: 1px,
         md: 576px,
         lg: 992px,
         xl: 1200px,
         xxl: 1400px
 );
 
-// Adjust the $container-max-widths if necessary
 $container-max-widths: (
         xs: 100%,  // Ensure the container is full width for xs
         sm: 1000px,
@@ -49,6 +47,25 @@ $container-max-widths: (
         xl: 1140px,
         xxl: 1320px
 );
+
+$btn-font-weight: 500;
+$btn-focus-box-shadow: rgba(225, 225, 225, 0.9);
+$btn-border-width: 0;
+$btn-hover-bg-tint-amount: 80%;
+
+$input-bg: map-get($custom-colors, "sage-light");
+$input-focus-bg: map-get($custom-colors, "sage-light");
+$input-border-color: map-get($custom-colors, "sage-light");
+$input-focus-border-color: $btn-focus-box-shadow;
+$input-focus-box-shadow:$btn-focus-box-shadow;
+
+
+$form-check-input-checked-bg-color: map-get($custom-colors, "sage-light");
+$form-check-input-checked-color: $body-color;
+$form-check-input-checked-border-color: map-get($custom-colors, "sage-light");
+$form-check-input-bg: map-get($custom-colors,"sage");
+$form-check-input-focus-border:map-get($custom-colors, "sage-light");
+$form-check-input-focus-box-shadow:map-get($custom-colors, "sage");
 
 
 
@@ -104,3 +121,4 @@ $container-max-widths: (
   align-content: center;
 
 }
+
