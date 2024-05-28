@@ -263,7 +263,7 @@ export function EditPlantC({plant, afterSubmit, reload}) {
 
     return (
         <>
-            {!isLoading ? (
+            {isLoading ? (
                 <div className="d-flex justify-content-center">
                     <LoadingAnimation/>
                 </div>
