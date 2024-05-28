@@ -25,7 +25,7 @@ export function QuarterMonthTimeLinePicker2({actionName, onChange}) {
         <div className="container bg-transparent rounded-3 p-3 mb-2 d-flex">
             <div className="row flex-fill">
                 <div className="col p-1 col-1 col-border">
-                    <div className="col-header mt-3">
+                    <div className="d-block fw-normal mb-2 mt-3">
                         {actionName}
                     </div>
                 </div>
@@ -39,7 +39,7 @@ export function QuarterMonthTimeLinePicker2({actionName, onChange}) {
                             return (
 
                                 <div key={month} className="col col-border">
-                                    <div className="col-header mb-0">{month.toUpperCase()}</div>
+                                    <div className="d-block fw-normal mb-2 mb-0">{month.toUpperCase()}</div>
                                     <div className={"row"}>
                                         {[startSubcol, startSubcol + 1, startSubcol + 2, endSubcol].map(subcolNumber => (
                                             <div key={subcolNumber} className="col my-1 col-border-top mx-0 p-0">
@@ -81,14 +81,15 @@ export function QuarterMonthTimeLinePickerEdit({actionName, onChange, preselecte
     };
 
     const getButtonStyle = (subcolNumber) => {
-        return timeLine.includes(subcolNumber) ? "m-0 p-0 selection-button selection-button-chosen" : "m-0 p-0 selection-button selection-button-notchosen";
+        return timeLine.includes(subcolNumber) ? "m-0 p-0 selection-button bg-sage-light" : "m-0 p-0 selection-button bg-sage-light opacity-50";
     };
+    //TODO:color not distinct enough
 
     return (
         <div className="container bg-transparent rounded-3 p-3 mb-2 d-flex">
             <div className="row flex-fill">
                 <div className="col p-1 col-1 col-border">
-                    <div className="col-header  mt-3">
+                    <div className="d-block fw-normal mb-2 mt-3">
                         {actionName}
                     </div>
                 </div>
@@ -102,7 +103,7 @@ export function QuarterMonthTimeLinePickerEdit({actionName, onChange, preselecte
                             return (
 
                                 <div key={month} className="col col-border">
-                                    <div className="col-header mb-0">{month.toUpperCase()}</div>
+                                    <div className="d-block fw-normal mb-2 mb-0">{month.toUpperCase()}</div>
                                     <div className={"row"}>
                                         {[startSubcol, startSubcol + 1, startSubcol + 2, endSubcol].map(subcolNumber => (
                                             <div key={subcolNumber} className="col my-1 col-border-top mx-0 p-0">

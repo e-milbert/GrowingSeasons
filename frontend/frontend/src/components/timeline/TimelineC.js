@@ -44,7 +44,7 @@ export function TimelineCompParent({plants, months}) {
 
 
                     <div className="col col-sm-2 col-border">
-                        <div className="col-header ">
+                        <div className="d-block fw-normal mb-2">
                             <div className={"col"}>name</div>
                         </div>
 
@@ -58,7 +58,7 @@ export function TimelineCompParent({plants, months}) {
                             {months.map((month) => (
                                 <div key={month} className=" col col-border">
 
-                                    <div className="text-sage-light col-header">{month.toUpperCase()}</div>
+                                    <div className="text-sage-light d-block fw-normal mb-2">{month.toUpperCase()}</div>
                                 </div>))}
                         </div>
                     </div>
@@ -120,7 +120,7 @@ export function TimelineComponent({plant, MONTHS, month}) {
                         <div key={plant.id + 'sowing'} className="mb-2 row d-flex justify-content-center">
                             {shouldShowDot(plant.sowing, subcolNumber)
                                 ? (<div className="dot bg-sowing"></div>)
-                                : (<div className="dot invisible"></div>)
+                                : (<div className="dot bg-transparent"></div>)
                             }
                         </div>
 
@@ -129,7 +129,7 @@ export function TimelineComponent({plant, MONTHS, month}) {
                         <div key={plant.id + 'harvest'} className="mb-2  row d-flex justify-content-center">
                             {shouldShowDot(plant.harvest, subcolNumber)
                                 ? (<div className="dot bg-harvesting"></div>)
-                                : (<div className="dot invisible"></div>)
+                                : (<div className="dot bg-transparent"></div>)
                             }
                         </div>
 
@@ -138,7 +138,7 @@ export function TimelineComponent({plant, MONTHS, month}) {
                         <div key={plant.id + 'planting'} className="mb-2  row d-flex justify-content-center">
                             {shouldShowDot(plant.planting, subcolNumber)
                                 ? (<div className="dot bg-planting"></div>)
-                                : (<div className="dot invisible"></div>)
+                                : (<div className="dot bg-transparent"></div>)
                             }
                         </div>
 
@@ -147,7 +147,7 @@ export function TimelineComponent({plant, MONTHS, month}) {
                         <div key={plant.id + 'bloom'} className="mb-2  row d-flex justify-content-center">
                             {shouldShowDot(plant.bloom, subcolNumber)
                                 ? (<div className="dot bg-flowering"></div>)
-                                : (<div className="dot invisible"></div>)
+                                : (<div className="dot bg-transparent"></div>)
                             }
                         </div>
 
