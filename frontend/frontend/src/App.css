@@ -15,13 +15,7 @@ select:focus {
     border: none;
 }
 
-.selection-button {
-    border: none !important;
-    outline: none !important;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
+
 
 .selection-button:focus {
     --bs-btn-focus-box-shadow: 0 0 0 0.9rem rgba(173, 133, 171, 0.9);
@@ -33,40 +27,14 @@ select:focus {
 }
 
 /*buttons
-.edit-button {
-    border: none !important;
-    outline: none !important;
-    background-color: transparent;
-}*/
-
-.edit-button:focus {
-    --bs-btn-focus-box-shadow: 0 0 0 0.25rem rgba(133, 173, 133, 0.5);
-}
 
 
 
 
-/*body, containers, general
-body {
-    margin: 0;
-    padding: 0;
-    background-color: rgb(19, 32, 19) ;
-    color: rgb(228, 231, 228) ;
 
-}*/
 
-.scrollable-SingleMonthTl {
-    max-height: 300px;
-    height: max-content;
-    overflow-y: auto;
 
-}
 
-.scrollable-main {
-    max-height: 90vh;
-    overflow-y: auto;
-
-}
 
 /*.scrollbar-custom::-webkit-scrollbar {
     width: 10px;
@@ -180,40 +148,12 @@ html, body {
 
 
 
-.col-header {
-    display: block;
-    font-weight: normal;
-    margin-bottom: 10px;
-}
-
-/*dot*/
-.dot {
-    align-content: center;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-left: 1px;
-    margin-right: 1px;
-    padding-left: 1px;
-    padding-right: 1px;
-}
-
-/*dot colors*/
-
-.selection-button-chosen {
-    background-color: rgb(133, 173, 133) !important;
-}
-
-.selection-button-notchosen {
-    background-color: rgb(228, 231, 228) !important;
-}
 
 
 
 
-.invisible {
-    background-color: transparent;
-}
+
+
 
 
 /*table carousel*/
@@ -225,25 +165,4 @@ html, body {
 
 
 
-/*carousel image*/
-.reduced-saturation {
-    filter: saturate(20%);
-}
 
-@media (min-device-width: 844px) {
-    .image-container {
-        max-height: 100vh;
-
-        width: auto;
-
-
-    }
-}
-@media (min-device-width: 1000px){
-.image-container {
-    max-height: 50vh;
-
-    width: auto;
-}
-
-}
