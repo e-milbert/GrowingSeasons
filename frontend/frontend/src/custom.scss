@@ -126,3 +126,43 @@ $form-check-input-focus-box-shadow:map-get($custom-colors, "sage");
   width: 170px;
 }
 
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Ensures the image covers the container without distortion */
+}
+
+
+@media (max-height: 370px){
+  .carousel-item img{
+    height: 140vh;
+  }
+}
+
+@media (min-height: 371px) and (max-height: 600px){
+  .carousel-item img{
+    height: 100vh;
+  }
+}
+
+@media (min-height: 601px){
+  .carousel-item img{
+    height: 50vh;
+  }
+}
+@media (min-height: 500px) and (max-width: 500px){
+  .carousel-item img{
+    height: 70vh;
+  }
+}
+@media (min-height: 500px) and (max-width: 400px){
+  .carousel-item img{
+    height: 90vh;
+  }
+}
+
+
+
+
+

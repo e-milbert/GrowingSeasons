@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import {forecastWeek, soilTemp, weatherCurrent} from "../../constants/apiConstants";
 import {days, months} from "../../constants/helper";
 import {LoadingAnimation} from "../shared/LoadingAnimation";
-import {Container} from "react-bootstrap";
 import sunnycloud from "../../images/sunnycloud.jpg"
 
 
@@ -107,7 +106,7 @@ export function InformationC() {
                 </div>
             ) : (
 
-                <div className={"rounded-3 pt-4 d-none d-md-block"}>
+                <div className={"rounded-3 pt-4 "}>
 
                     <div id="weatherForecast" className="carousel carousel-dark slide"
                          data-bs-ride="carousel">
@@ -121,14 +120,14 @@ export function InformationC() {
                         </div>
                         <div className="carousel-inner">
 
-                            <img src={sunnycloud} className="d-block w-100" alt="sun and clouds in the sky"/>
 
                             <div className="carousel-item active " data-bs-interval="8000">
+                                <img src={sunnycloud} className="d-block w-100" alt="sun and clouds in the sky"/>
                                 <div className="carousel-caption ">
 
                                     <h4>{date} {currentWeather["time"]}</h4>
 
-                                    <table className="table text-black table-bg-transp-blur ">
+                                    <table className="table table-responsive text-black table-bg-transp-blur ">
                                         <tbody className="text-start fw-semibold">
                                         <tr>
                                             <td><i className='bx bxs-thermometer bx-sm'/></td>
@@ -158,10 +157,11 @@ export function InformationC() {
                             </div>
 
                             <div className="carousel-item" data-bs-interval="8000">
-                                <div className="carousel-caption d-none d-md-block">
+                                <img src={sunnycloud} className="d-block w-100" alt="sun and clouds in the sky"/>
+                                <div className="carousel-caption">
 
                                     <h4 className={"text-center"}>soil conditions this week</h4>
-                                    <table className="table text-black table-bg-transp-blur ">
+                                    <table className="table table-responsive text-black table-bg-transp-blur ">
                                         <thead>
                                         <tr>
                                             <th scope={"col"} colSpan={1} className={"text-start"}>
@@ -196,10 +196,11 @@ export function InformationC() {
                             </div>
 
                             <div className="carousel-item" data-bs-interval="8000">
-                                <div className="carousel-caption d-none d-md-block">
+                                <img src={sunnycloud} className="d-block w-100" alt="sun and clouds in the sky"/>
+                                <div className="carousel-caption">
 
                                     <h4>forecast</h4>
-                                    <table className="table table-sm text-black table-bg-transp-blur ">
+                                    <table className="table table-responsive table-sm text-black table-bg-transp-blur ">
                                         <thead>
                                         <tr>
                                             <th scope={"col"}>
