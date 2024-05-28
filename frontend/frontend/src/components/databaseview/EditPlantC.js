@@ -1,5 +1,3 @@
-import Form from "react-bootstrap/Form";
-import {Button, Col, Container, Row} from "react-bootstrap";
 import {OneLineFormC} from "../formHelpers/OneLineFormC";
 import {DynamicDropdown2, DynamicSingleValueChoiceDropdown2} from "../formHelpers/McDropdownC";
 import {QuarterMonthTimeLinePickerEdit} from "../formHelpers/QuarterMonthTimeLinePicker";
@@ -249,14 +247,14 @@ export function EditPlantC({plant, afterSubmit, reload}) {
     const handlePoisonous = (event) => {
         setPoisonous(event.target.checked);
     }
-    const handleMinGermination=(value)=>{
-        if(value > maxGerm){
+    const handleMinGermination = (value) => {
+        if (value > maxGerm) {
             setMaxGerm(value)
         }
         setMinGerm(value);
     }
-    const handleMaxGermination=(value)=>{
-        if(value<minGerm){
+    const handleMaxGermination = (value) => {
+        if (value < minGerm) {
             setMinGerm(value);
         }
         setMaxGerm(value);
@@ -265,144 +263,192 @@ export function EditPlantC({plant, afterSubmit, reload}) {
 
     return (
         <>
-            {isLoading ? (
-                <Container className="d-flex justify-content-center">
+            {!isLoading ? (
+                <div className="d-flex justify-content-center">
                     <LoadingAnimation/>
-                </Container>
+                </div>
             ) : (
-                <Form className="p-4">
-                    <Row>
-                        <Col xl={6} className="flex-column">
+                <form className="p-4">
+                    <div className="row">
+                        <div className="col-xl-6 d-flex flex-column">
                             <div className="mb-4">
-                                <Row>
-                                    <Col>
+                                <div className="row">
+                                    <div className="col">
                                         <OneLineFormC
                                             idName="name1"
                                             labelText="Name"
                                             placeholderText={plant.commonName}
-                                            handleInputChangeFunction={setCommonName}/>
-                                    </Col>
-                                    <Col>
+                                            handleInputChangeFunction={setCommonName}
+                                        />
+                                    </div>
+                                    <div className="col">
                                         <OneLineFormC
                                             idName="name2"
                                             labelText="Official Name"
                                             placeholderText={publicName}
-                                            handleInputChangeFunction={setPublicName}/>
-                                    </Col>
-                                </Row>
+                                            handleInputChangeFunction={setPublicName}
+                                        />
+                                    </div>
+                                </div>
                             </div>
 
                             <div className="mb-4">
                                 <div className="d-flex justify-content-start">
                                     <div className="px-3 my-2">
-                                        <Form.Check
+                                        <input
                                             type="checkbox"
-                                            label="Edible"
+                                            id="checkboxEdible"
                                             checked={edible}
                                             onChange={handleEdible}
                                             name="checkboxEdible"
-                                            className="fw-semibold"
+                                            className="form-check-input"
                                         />
+                                        <label htmlFor="checkboxEdible"
+                                               className="form-check-label fw-semibold">Edible</label>
                                     </div>
                                     <div className="px-3 my-2">
-                                        <Form.Check
+                                        <input
                                             type="checkbox"
-                                            label="Ornamental"
+                                            id="checkboxOrnamental"
                                             checked={ornamental}
                                             onChange={handleOrnamental}
                                             name="checkboxOrnamental"
-                                            className="fw-semibold"
-                                        /></div>
+                                            className="form-check-input"
+                                        />
+                                        <label htmlFor="checkboxOrnamental"
+                                               className="form-check-label fw-semibold">Ornamental</label>
+                                    </div>
                                     <div className="px-3 my-2">
-                                        <Form.Check
+                                        <input
                                             type="checkbox"
-                                            label="Poisonous"
+                                            id="checkboxPoisonous"
                                             checked={poisonous}
                                             onChange={handlePoisonous}
                                             name="checkboxPoisonous"
-                                            className="fw-semibold"
-                                        /></div>
+                                            className="form-check-input"
+                                        />
+                                        <label htmlFor="checkboxPoisonous"
+                                               className="form-check-label fw-semibold">Poisonous</label>
+                                    </div>
                                 </div>
                             </div>
 
                             <div className="mb-4">
+                                <DynamicDropdown2
+                                    bxIcon="bx bxs-florist mx-3"
+                                    key="color"
+                                    dropdownname="color"
+                                    data={allColors}
+                                    valueKey="name"
+                                    preselected={chosenColors}
+                                    onSelectedOptionsChange={setChosenColors}
+                                />
 
-                                <DynamicDropdown2 bxIcon="bx bxs-florist mx-3"
-                                                  key="color"
-                                                  dropdownname="color"
-                                                  data={allColors}
-                                                  valueKey="name"
-                                                  preselected={chosenColors}
-                                                  onSelectedOptionsChange={setChosenColors}/>
+                                <DynamicDropdown2
+                                    bxIcon="bx bx-sun mx-3"
+                                    key="expo"
+                                    dropdownname="exposure"
+                                    data={allExposures}
+                                    valueKey="type"
+                                    preselected={chosenExposures}
+                                    onSelectedOptionsChange={setChosenExposures}
+                                />
 
-                                <DynamicDropdown2 bxIcon="bx bx-sun mx-3"
-                                                  key="expo"
-                                                  dropdownname="exposure"
-                                                  data={allExposures}
-                                                  valueKey="type"
-                                                  preselected={chosenExposures}
-                                                  onSelectedOptionsChange={setChosenExposures}/>
-
-                                <DynamicDropdown2 bxIcon="bx bx-vertical-bottom mx-3"
-                                                  key="soil"
-                                                  dropdownname="soil"
-                                                  data={allSoils}
-                                                  valueKey="type"
-                                                  preselected={chosenSoils}
-                                                  onSelectedOptionsChange={setChosenSoils}/>
+                                <DynamicDropdown2
+                                    bxIcon="bx bx-vertical-bottom mx-3"
+                                    key="soil"
+                                    dropdownname="soil"
+                                    data={allSoils}
+                                    valueKey="type"
+                                    preselected={chosenSoils}
+                                    onSelectedOptionsChange={setChosenSoils}
+                                />
                             </div>
 
                             <div className="mb-4">
+                                <DynamicSingleValueChoiceDropdown2
+                                    bxIcon="bx bx-up-arrow-alt mx-3"
+                                    data={allSizes}
+                                    valueKey="size"
+                                    preselected={heightSize}
+                                    onSelectedOptionsChange={setHeightSize}
+                                    dropdownname="height"
+                                />
 
-                                <DynamicSingleValueChoiceDropdown2 bxIcon="bx bx-up-arrow-alt mx-3"
-                                                                   data={allSizes} valueKey="size"
-                                                                   preselected={heightSize}
-                                                                   onSelectedOptionsChange={setHeightSize}
-                                                                   dropdownname="height"/>
-
-
-                                <DynamicSingleValueChoiceDropdown2 bxIcon="bx bx-right-arrow-alt mx-3"
-                                                                   data={allSizes}
-                                                                   valueKey="size"
-                                                                   preselected={widthSize}
-                                                                   onSelectedOptionsChange={setWidthSize}
-                                                                   dropdownname="width"/>
+                                <DynamicSingleValueChoiceDropdown2
+                                    bxIcon="bx bx-right-arrow-alt mx-3"
+                                    data={allSizes}
+                                    valueKey="size"
+                                    preselected={widthSize}
+                                    onSelectedOptionsChange={setWidthSize}
+                                    dropdownname="width"
+                                />
                             </div>
 
                             <div className="mb-4">
-                                <Row>
-                                    <h5 className="text-start m-3">germination temperature</h5>
-                                    <Col>
-                                        <OneLineFormC idName="germmin" handleInputChangeFunction={handleMinGermination}
-                                                      labelText="min temperature" placeholderText={minGerm}/>
-                                    </Col>
-                                    <Col>
-                                        <OneLineFormC idName="germmax" handleInputChangeFunction={handleMaxGermination}
-                                                      labelText="max temperature" placeholderText={maxGerm}/>
-                                    </Col>
-                                </Row>
+                                <div className="row">
+                                    <h5 className="text-start m-3">Germination Temperature</h5>
+                                    <div className="col">
+                                        <OneLineFormC
+                                            idName="germmin"
+                                            handleInputChangeFunction={handleMinGermination}
+                                            labelText="Min Temperature"
+                                            placeholderText={minGerm}
+                                        />
+                                    </div>
+                                    <div className="col">
+                                        <OneLineFormC
+                                            idName="germmax"
+                                            handleInputChangeFunction={handleMaxGermination}
+                                            labelText="Max Temperature"
+                                            placeholderText={maxGerm}
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                        </Col>
-                        <Col xl={6} className="pt-5 flex-column">
+                        </div>
+                        <div className="col-xl-6 pt-5 d-flex flex-column">
                             <div className="mb-4">
-                                <QuarterMonthTimeLinePickerEdit actionName="sow" preselected={sowingTimes}
-                                                                onChange={setSowingTimes}/>
-                                <QuarterMonthTimeLinePickerEdit actionName="plant" preselected={plantingTimes}
-                                                                onChange={setPlantingTimes}/>
-                                <QuarterMonthTimeLinePickerEdit actionName="harvest" preselected={harvestingTimes}
-                                                                onChange={setHarvestingTimes}/>
-                                <QuarterMonthTimeLinePickerEdit actionName="bloom" preselected={bloomingTimes}
-                                                                onChange={setBloomingTimes}/>
+                                <QuarterMonthTimeLinePickerEdit
+                                    actionName="sow"
+                                    preselected={sowingTimes}
+                                    onChange={setSowingTimes}
+                                />
+                                <QuarterMonthTimeLinePickerEdit
+                                    actionName="plant"
+                                    preselected={plantingTimes}
+                                    onChange={setPlantingTimes}
+                                />
+                                <QuarterMonthTimeLinePickerEdit
+                                    actionName="harvest"
+                                    preselected={harvestingTimes}
+                                    onChange={setHarvestingTimes}
+                                />
+                                <QuarterMonthTimeLinePickerEdit
+                                    actionName="bloom"
+                                    preselected={bloomingTimes}
+                                    onChange={setBloomingTimes}
+                                />
                             </div>
-                        </Col>
-                    </Row>
-                </Form>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="text-center">
+                            <button
+                                className="mb-2 btn-sage-light btn text-black"
+                                data-bs-dismiss="modal"
+                                data-bs-target="#editModal"
+                                onClick={handleSubmit}>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
             )}
-            <Row>
-                <div className="text-center">
-                    <Button className="mb-2 btn-sage-light btn text-black" data-bs-dismiss="modal" data-bs-target="#editModal" onClick={handleSubmit}>save</Button>
-                </div>
-            </Row>
+
+
         </>
     )
 
