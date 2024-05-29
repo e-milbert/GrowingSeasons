@@ -47,36 +47,41 @@ export function DynamicDropdown({data, valueKey, onSelectedOptionsChange, dropdo
         <div className="d-flex my-2">
             <div>
                 <div className="d-flex justify-content-start">
-                    <Dropdown className="btn custom-button rounded-2  text-start crowbar fw-semibold">
-                        <div className="">
-                            <Dropdown.Toggle as="div" className="cursor-pointer w-100">
-                                <i className={bxIcon}></i>{dropdownname}
-                            </Dropdown.Toggle>
-                        </div>
-                        <Dropdown.Menu>
+                    <div className="dropdown">
+                        <button
+                            className="btn btn-sage-light rounded-2 text-start btn-fixed-size fw-semibold dropdown-toggle"
+                            type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i className={bxIcon}></i> {dropdownname}
+                        </button>
+                        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {availableOptions.map((item, index) => (
-                                <Dropdown.Item onClick={() => handleChange(item[valueKey])}>
-                                    {item[valueKey]}
-                                </Dropdown.Item>))}
-                            <Dropdown.Item className={"text-center"} onClick={() => handleNewElement()}>
-                                <i className='bx bx-plus bx-xs'></i> </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                                <li key={index}>
+                                    <button className="dropdown-item" type={"button"} onClick={() => handleChange(item[valueKey])}>
+                                        {item[valueKey]}
+                                    </button>
+                                </li>
+                            ))}
+                            <li className="text-center">
+                                <button className="dropdown-item" type={"button"} onClick={() => handleNewElement()}>
+                                    <i className='bx bx-plus bx-xs'></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-
             <div>
-
-                {selectedOptions.map((item, index) => (<button
-                    key={index}
-                    className="btn custom-button mx-2"
-                    type="button"
-                    onClick={() => handleRemove(item[valueKey])}
-                >
-                    {item[valueKey]}
-                </button>))}
-
+                {selectedOptions.map((item, index) => (
+                    <button
+                        key={index}
+                        className="btn btn-sage-light mx-2"
+                        type="button"
+                        onClick={() => handleRemove(item[valueKey])}
+                    >
+                        {item[valueKey]}
+                    </button>
+                ))}
             </div>
         </div>
     </>);
@@ -121,35 +126,41 @@ export function DynamicSingleValueChoiceDropdown({
         <div className="d-flex my-2">
             <div>
                 <div className="d-flex justify-content-start">
-                    <Dropdown className="btn custom-button rounded-2  text-start crowbar">
-                        <div className="">
-                            <Dropdown.Toggle as="div" className="cursor-pointer w-100">
-                                <i className={bxIcon}></i>{dropdownname}
-                            </Dropdown.Toggle>
-                        </div>
-                        <Dropdown.Menu>
+                    <div className="dropdown">
+                        <button className="btn btn-sage-light rounded-2 text-start btn-fixed-size dropdown-toggle"
+                                type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i className={bxIcon}></i> {dropdownname}
+                        </button>
+                        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {data.map((item, index) => (
-                                <DropdownItem key={index} onClick={() => handleChange(item[valueKey])}>
-                                    {item[valueKey]}
-                                </DropdownItem>))}
-
-                            <Dropdown.Item className={"text-center"} onClick={() => handleNewElement()}>
-                                <i className='bx bx-plus bx-xs'></i> </Dropdown.Item>
-                        </Dropdown.Menu>
-
-                    </Dropdown>
+                                <li key={index}>
+                                    <button className="dropdown-item" type={"button"} onClick={() => handleChange(item[valueKey])}>
+                                        {item[valueKey]}
+                                    </button>
+                                </li>
+                            ))}
+                            <li className="text-center">
+                                <button className="dropdown-item" type={"button"} onClick={() => handleNewElement()}>
+                                    <i className='bx bx-plus bx-xs'></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div className="col-10 d-flex justify-content-start">
-                {selectedOption && (<button
-                    className="btn custom-button mx-2 fw-semibold"
-                    type="button"
-                    onClick={handleRemove}
-                >
-                    {selectedOption[valueKey]}
-                </button>)}
+                {selectedOption && (
+                    <button
+                        className="btn btn-sage-light mx-2 fw-semibold"
+                        type="button"
+                        onClick={handleRemove}
+                    >
+                        {selectedOption[valueKey]}
+                    </button>
+                )}
             </div>
         </div>
+
     </>);
 }
 
@@ -197,36 +208,37 @@ export function DynamicDropdown2({data, valueKey, onSelectedOptionsChange, dropd
             <div className="d-flex my-2">
                 <div>
                     <div className="d-flex justify-content-start">
-                        <Dropdown className="btn custom-button rounded-2  text-start crowbar">
-                            <div className="">
-                                <Dropdown.Toggle as="div" className="cursor-pointer w-100">
-                                    <i className={bxIcon}></i>{dropdownname}
-                                </Dropdown.Toggle>
-                            </div>
-                            <Dropdown.Menu>
+                        <div className="dropdown">
+                            <button className="btn btn-sage-light rounded-2 text-start btn-fixed-size dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i className={bxIcon}></i> {dropdownname}
+                            </button>
+                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 {availableOptions.map((item, index) => (
-                                    <DropdownItem onClick={() => handleChange(item[valueKey])}>
-                                        {item[valueKey]}
-                                    </DropdownItem>))}
-                            </Dropdown.Menu>
-                        </Dropdown>
+                                    <li key={index}>
+                                        <button className="dropdown-item" type={"button"} onClick={() => handleChange(item[valueKey])}>
+                                            {item[valueKey]}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-
                 <div>
-
-                    {selectedOptions.map((item, index) => (<button
-                        key={index}
-                        className="btn custom-button mx-2"
-                        type="button"
-                        onClick={() => handleRemove(item[valueKey])}
-                    >
-                        {item[valueKey]}
-                    </button>))}
-
+                    {selectedOptions.map((item, index) => (
+                        <button
+                            key={index}
+                            className="btn btn-sage-light mx-2"
+                            type="button"
+                            onClick={() => handleRemove(item[valueKey])}
+                        >
+                            {item[valueKey]}
+                        </button>
+                    ))}
                 </div>
             </div>
+
         </>
     );
 }
@@ -260,31 +272,36 @@ export function DynamicSingleValueChoiceDropdown2({
         <div className="d-flex my-2">
             <div>
                 <div className="d-flex justify-content-start">
-                    <Dropdown className="btn custom-button rounded-2  text-start crowbar">
-                        <div className="">
-                            <Dropdown.Toggle as="div" className="cursor-pointer w-100">
-                                <i className={bxIcon}></i>{dropdownname}
-                            </Dropdown.Toggle>
-                        </div>
-                        <Dropdown.Menu>
+                    <div className="dropdown">
+                        <button className="btn btn-sage-light rounded-2 text-start btn-fixed-size dropdown-toggle"
+                                type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i className={bxIcon}></i> {dropdownname}
+                        </button>
+                        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {data.map((item, index) => (
-                                <DropdownItem key={index} onClick={() => handleChange(item[valueKey])}>
-                                    {item[valueKey]}
-                                </DropdownItem>))}
-                        </Dropdown.Menu>
-                    </Dropdown>
+                                <li key={index}>
+                                    <button className="dropdown-item" type={"button"} onClick={() => handleChange(item[valueKey])}>
+                                        {item[valueKey]}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div className="col-10 d-flex justify-content-start">
-                {selectedOption && (<button
-                    className="btn custom-button mx-2"
-                    type="button"
-                    onClick={handleRemove}
-                >
-                    {selectedOption[valueKey]}
-                </button>)}
+                {selectedOption && (
+                    <button
+                        className="btn btn-sage-light mx-2"
+                        type="button"
+                        onClick={handleRemove}
+                    >
+                        {selectedOption[valueKey]}
+                    </button>
+                )}
             </div>
         </div>
+
     </>);
 }
 

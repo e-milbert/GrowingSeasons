@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Col, Container, Dropdown, DropdownItem, Row, Table} from "react-bootstrap";
+import {Col, Dropdown, DropdownItem, Row, Table} from "react-bootstrap";
 import {OneLineFormC} from "../formHelpers/OneLineFormC";
 import {plantPlainGetAll} from "../../constants/apiConstants";
 import {ModalHoldingComponentC} from "./ModalHoldingComponentC";
@@ -59,11 +59,11 @@ export function DatabaseParent() {
         <>
             {isLoading ? (
 
-                <Row className="min-vh-100 d-flex justify-content-center align-items-center">
-                    <Col className="d-flex justify-content-center align-items-center">
+                <div className=" row min-vh-100 d-flex justify-content-center align-items-center">
+                    <div className=" col d-flex justify-content-center align-items-center">
                         <LoadingAnimation/>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             ) : (
                 <DatabaseC headerMapping={tableHeaders} listOfData={data} reload={refreshData}/>
 
@@ -152,72 +152,75 @@ export function DatabaseC({listOfData, headerMapping, reload}) {
 
 
     return (
-        <Container className="bg-container rounded-3 p-4">
-            <Row className="m-2 d-flex">
-                <Col>
+        <div className="container container-style p-4">
+            <div className="row m-2 d-flex justify-content-center">
+                <div className={"col"}>
                     <div className="d-flex my-2">
                         <div>
                             <div className="d-flex justify-content-start">
-                                <Dropdown className="btn custom-button rounded-2  text-center crowbar">
-                                    <div className="">
-                                        <Dropdown.Toggle as="div" className="cursor-pointer">
-                                            sort by:
-                                        </Dropdown.Toggle>
-                                    </div>
-                                    <Dropdown.Menu>
-                                        {listOfHeads.map((head, index) => (
-                                            <DropdownItem key={index} onClick={() => handleSorting(head)}>
-                                                {head}
-                                            </DropdownItem>))}
-                                    </Dropdown.Menu>
-                                </Dropdown>
+                                <div className={"dropdown"}>
+                                <button className="btn custom-button dropdown-toggle" type="button" id="sortByDrop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        sort by:
+                                </button>
+                                <ul className={"dropdown-menu"} aria-labelledby="sortByDrop">
+                                    {listOfHeads.map((head, index) => (
+                                        <li className={"border-bottom border-sage px-2 py-1"}>
+                                            <div key={index} className={"cursor-pointer fw-medium "} onClick={() => handleSorting(head)}>
+                                            {head}
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
                     </div>
-                </Col>
-                <Col>
-                    <OneLineFormC
-                        labelText="search:"
-                        placeholderText=""
-                        idName="search"
-                        handleInputChangeFunction={handleSearch}
+                </div>
+            </div>
+            <div className={"col"}>
+                <OneLineFormC
+                    labelText="search:"
+                    idName="search"
+                    handleInputChangeFunction={handleSearch}
 
-                    />
-                </Col>
-            </Row>
-            <Row className="d-flex">
-                <Table className="custom-table" hover striped bordered>
-                    <thead>
-                    <tr>
-                        {listOfHeads.map((head) => (
-                            <th className="custom-table fw-medium" key={head}>
-                                {head}
-                            </th>
-                        ))}
-                        <th className="custom-table"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {tableData.map((rowData) => (
-                        <tr key={`row-${rowData[uniqueIdentifierKey]}`}>
-                            {keys.map((key) => (
-                                <td
-                                    className="custom-table fw-normal"
-                                    key={`cell-${rowData[uniqueIdentifierKey]}-${key}`}>
+                />
+            </div>
+        </div>
+    <div className="row d-flex table-responsive">
+        <table className="table table-bordered table-hover table-sage-light">
+            <thead>
+            <tr>
+                {listOfHeads.map((head) => (
+                    <th className="custom-table fw-medium" key={head}>
+                        {head}
+                    </th>
+                ))}
+                <th className="custom-table"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {tableData.map((rowData) => (
+                <tr key={`row-${rowData[uniqueIdentifierKey]}`}>
+                    {keys.map((key) => (
+                        <td
+                            className="align-middle fw-normal"
+                            key={`cell-${rowData[uniqueIdentifierKey]}-${key}`}>
 
-                                    {Array.isArray(rowData[key]) ? rowData[key].join(", ") : rowData[key]}
-                                </td>
-                            ))}
-                            <td>
-                                <ModalHoldingComponentC id={rowData[uniqueIdentifierKey]} data={rowData}
-                                                        reload={reload}/>
-                            </td>
-                        </tr>
-
+                            {Array.isArray(rowData[key]) ? rowData[key].join(", ") : rowData[key]}
+                        </td>
                     ))}
-                    </tbody>
-                </Table>
-            </Row>
-        </Container>
-    );
+                    <td className={"align-middle"}>
+
+                        <ModalHoldingComponentC id={rowData[uniqueIdentifierKey]} data={rowData}
+                                                reload={reload}/>
+
+                    </td>
+                </tr>
+
+            ))}
+            </tbody>
+        </table>
+    </div>
+</div>
+)
+    ;
 }

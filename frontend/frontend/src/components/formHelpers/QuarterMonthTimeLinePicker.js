@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {Button, Col, Container, Row} from "react-bootstrap";
 import {monthsShort} from "../../constants/helper";
 
 
@@ -12,57 +11,59 @@ export function QuarterMonthTimeLinePicker2({actionName, onChange}) {
                 ? prevTimeLine.filter(item => item !== subcolNumber)
                 : [...prevTimeLine, subcolNumber];
 
-            onChange(newTimeLine);  // Now using the updated timeline
+            onChange(newTimeLine);
             return newTimeLine;
         });
     };
 
     const getButtonStyle = (subcolNumber) => {
-        return timeLine.includes(subcolNumber) ? "m-0 p-0 selection-button selection-button-chosen" : "m-0 p-0 selection-button selection-button-notchosen";
+        return timeLine.includes(subcolNumber) ? "btn border-1 m-0 p-0 selection-button bg-sage-light" : "btn border-1 m-0 p-0 selection-button bg-sage-light opacity-50";
     };
 
     return (
-        <Container className="container-bg-secondary rounded-3 p-3 mb-2">
-            <Row className="flex-fill">
-                <Col className="col-1 col-border">
-                    <div className="col-header  mt-3">
+        <div className="container bg-transparent rounded-3 p-3 mb-2 d-flex">
+            <div className="row flex-fill">
+                <div className="col p-1 col-1 col-border">
+                    <div className="d-block fw-normal mb-2 mt-3">
                         {actionName}
                     </div>
-                </Col>
+                </div>
 
-                <Col className="col-11">
-                    <Row className="year-grid">
+                <div className="col col-11">
+                    <div className="row year-grid">
                         {monthsShort.map((month, monthIndex) => {
                             const startSubcol = monthIndex * 4 + 1;
                             const endSubcol = startSubcol + 3;
 
                             return (
 
-                                <Col key={month} className="col-border">
-                                    <div className="col-header mb-0">{month.toUpperCase()}</div>
-                                    <Row>
+                                <div key={month} className="col col-border">
+                                    <div className="d-block fw-normal mb-2 mb-0">{month.toUpperCase()}</div>
+                                    <div className={"row"}>
                                         {[startSubcol, startSubcol + 1, startSubcol + 2, endSubcol].map(subcolNumber => (
-                                            <Col key={subcolNumber} className="my-1 col-border-top mx-0 p-0">
-                                                <Button
+                                            <div key={subcolNumber} className="col my-1 col-border-top mx-0 p-0">
+                                                <button
+                                                    type="button"
                                                     className={getButtonStyle(subcolNumber)}
                                                     onClick={() => addActionToTimeLine(subcolNumber)}
 
-                                                    type="button">
+                                                    >
 
-                                                </Button>
-                                            </Col>
+                                                </button>
+                                            </div>
                                         ))}
-                                    </Row>
-                                </Col>
+                                    </div>
+                                </div>
                             );
                         })}
-                    </Row>
-                </Col>
-            </Row>
-        </Container>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 
+//TODO need to fix duplication;
 
 export function QuarterMonthTimeLinePickerEdit({actionName, onChange, preselected}) {
     const [timeLine, setTimeLine] = useState(preselected);
@@ -74,53 +75,52 @@ export function QuarterMonthTimeLinePickerEdit({actionName, onChange, preselecte
                 ? prevTimeLine.filter(item => item !== subcolNumber)
                 : [...prevTimeLine, subcolNumber];
 
-            onChange(newTimeLine);  // Now using the updated timeline
+            onChange(newTimeLine);
             return newTimeLine;
         });
     };
 
     const getButtonStyle = (subcolNumber) => {
-        return timeLine.includes(subcolNumber) ? "m-0 p-0 selection-button selection-button-chosen" : "m-0 p-0 selection-button selection-button-notchosen";
+        return timeLine.includes(subcolNumber) ? "btn m-0 p-0 selection-button bg-sage-light" : "btn m-0 p-0 selection-button bg-sage-light opacity-50";
     };
+    //TODO:color not distinct enough
 
     return (
-        <Container className="container-bg-secondary rounded-3 p-3 mb-2">
-            <Row className="flex-fill">
-                <Col className="col-1 col-border">
-                    <div className="col-header  mt-3">
+        <div className="container bg-transparent rounded-3 p-3 mb-2 d-flex">
+            <div className="row flex-fill">
+                <div className="col p-1 col-1 col-border">
+                    <div className="d-block fw-normal mb-2 mt-3">
                         {actionName}
                     </div>
-                </Col>
+                </div>
 
-                <Col className="col-11">
-                    <Row className="year-grid">
+                <div className="col col-11">
+                    <div className="row year-grid">
                         {monthsShort.map((month, monthIndex) => {
                             const startSubcol = monthIndex * 4 + 1;
                             const endSubcol = startSubcol + 3;
 
                             return (
 
-                                <Col key={month} className="col-border">
-                                    <div className="col-header mb-0">{month.toUpperCase()}</div>
-                                    <Row>
+                                <div key={month} className="col col-border">
+                                    <div className="d-block fw-normal mb-2 mb-0">{month.toUpperCase()}</div>
+                                    <div className={"row"}>
                                         {[startSubcol, startSubcol + 1, startSubcol + 2, endSubcol].map(subcolNumber => (
-                                            <Col key={subcolNumber} className="my-1 col-border-top mx-0 p-0">
-                                                <Button
+                                            <div key={subcolNumber} className="col my-1 col-border-top mx-0 p-0">
+                                                <button type="button"
                                                     className={getButtonStyle(subcolNumber)}
                                                     onClick={() => addActionToTimeLine(subcolNumber)}
-
-                                                    type="button">
-
-                                                </Button>
-                                            </Col>
+                                                    >
+                                                </button>
+                                            </div>
                                         ))}
-                                    </Row>
-                                </Col>
+                                    </div>
+                                </div>
                             );
                         })}
-                    </Row>
-                </Col>
-            </Row>
-        </Container>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

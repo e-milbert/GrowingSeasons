@@ -1,13 +1,11 @@
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import {useState} from "react";
 
-export function OneLineFormC({labelText, placeholderText, idName, handleInputChangeFunction, focus = false}) {
+export function OneLineFormC({labelText, placeholderText, idName, handleInputChangeFunction}) {
 
     const [inputValue, setInputValue] = useState('');
 
-    const onChange = (event) => { //event handler
-        setInputValue(event.target.value);  //set the new value first
+    const onChange = (event) => {
+        setInputValue(event.target.value);
         handleInputChangeFunction && handleInputChangeFunction(event.target.value);
 
     }
@@ -15,18 +13,20 @@ export function OneLineFormC({labelText, placeholderText, idName, handleInputCha
 
     return (
         <>
-            <InputGroup className="mb-2">
-                <InputGroup.Text className="input-grp-label fw-normal" id={idName}>{labelText}</InputGroup.Text>
-                <Form.Control
-                    className="input-grp-text"
+            <div className="mb-2 ">
+                <label htmlFor={idName} className={"form-label mb-0"}>{labelText}</label>
+                <input
+                    className="form-control"
+                    type="text"
                     placeholder={placeholderText}
                     aria-label={labelText}
-                    aria-describedby={idName}
+                    id={idName}
                     value={inputValue}
                     onChange={onChange}
-                    autoFocus={focus}
                 />
-            </InputGroup>
+            </div>
         </>
     )
+
+
 }

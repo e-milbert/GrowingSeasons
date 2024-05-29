@@ -1,4 +1,5 @@
-import './App.css';
+
+import "./custom.scss";
 import {NavigationC} from "./components/shared/NavigationC";
 
 

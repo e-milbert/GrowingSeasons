@@ -1,0 +1,272 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+/*colors general*/
+
+$body-bg: #8CBAAE;
+$body-color: #343a40;
+
+
+$style-colors: (
+        "sage": #8CBAAE,
+        "sage-light": #c6dcd6,
+        "plum": #5d576b,
+        "buttery": #d7e9af,
+        "peachy": #f18c7e,
+        "offwhite": rgb(228, 231, 228)
+);
+$action-colors: (
+        "sowing": #674b37,
+        "planting": #5c809e,
+        "harvesting": #a77f1c,
+        "flowering": #9a4179
+);
+
+$custom-colors: map-merge($action-colors, $style-colors);
+$theme-colors: map-merge($theme-colors, $custom-colors);
+$table-variants:map-merge($table-variants, $custom-colors);
+
+$border-time-table: #F5F2E966;
+
+$navbar-light-active-color: map-get($custom-colors, "sage");
+
+$container-bg: rgba(map-get($custom-colors, "sage-light"), 0.2);
+
+/*breakpoints*/
+
+$grid-breakpoints: (
+        xs: 0,
+        sm: 1px,
+        md: 576px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1400px
+);
+
+$container-max-widths: (
+        xs: 100%,
+        sm: 1000px,
+        md: 1002px,
+        lg: 1003px,
+        xl: 1140px,
+        xxl: 1320px
+);
+
+/*input, buttons, check, dropdown, table, heading*/
+
+$input-btn-focus-width: 0.1rem;
+$input-btn-focus-color-opacity: 0.5;
+$input-btn-focus-color: rgba(map-get($custom-colors, "offwhite"), $input-btn-focus-color-opacity);
+$input-btn-focus-blur: 0;
+$input-btn-focus-box-shadow: 0 0 $input-btn-focus-blur $input-btn-focus-width $input-btn-focus-color;
+
+
+$btn-font-weight: 500;
+$btn-box-shadow: $input-btn-focus-box-shadow;
+$btn-border-width: 2px;
+$btn-hover-bg-tint-amount: 80%;
+$btn-active-border-tint-amount:   100%;
+
+
+$input-bg: map-get($custom-colors, "sage-light");
+$input-focus-bg: map-get($custom-colors, "offwhite");
+$input-border-color: map-get($custom-colors, "sage-light");
+$input-focus-border-color: map-get($custom-colors, "offwhite");
+$input-focus-box-shadow:none;
+
+
+$form-check-input-focus-border:map-get($custom-colors, "offwhite");
+$form-check-input-checked-bg-color: map-get($custom-colors, "sage-light");
+$form-check-input-checked-color: $body-color;
+$form-check-input-checked-border-color: $form-check-input-checked-bg-color;
+$form-check-input-bg: map-get($custom-colors,"sage");
+$form-check-input-focus-box-shadow:$input-btn-focus-box-shadow;
+
+
+$dropdown-bg: map-get($custom-colors,"offwhite");
+$dropdown-link-hover-bg: map-get($custom-colors,"sage-light");
+$dropdown-link-active-bg: map-get($custom-colors,"sage");
+
+$table-color:                 $body-color;
+$table-bg:                    transparent;
+$table-accent-bg:             transparent;
+
+$headings-color:              $body-color;
+
+@import "~bootstrap/scss/bootstrap";
+@include make-grid-columns();
+.container-style {
+  background: $container-bg;
+  border-radius: 8px;
+}
+
+@media (max-device-width: 950px) {
+
+  .container {
+    min-width: 100% !important;
+  }
+
+}
+
+
+
+/* dot for time line display */
+
+.dot {
+  align-content: center;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 1px;
+  margin-right: 1px;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+/* time line table grid*/
+
+.col-border {
+  border-right: 2px dotted $border-time-table;
+}
+
+.col-border-top {
+  border-top: 2px solid $border-time-table;
+}
+
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-content: center;
+
+}
+@media (max-width: 575px) {
+  .year-grid {
+    grid-template-columns: repeat(12, minmax(60px, 1fr)); /* Ensures a minimum width of 50px per column before scrolling */
+  }
+}
+
+@media (max-width: 575px) {
+  .sm-scroll {
+    overflow-x: scroll;
+  }
+}
+
+.mon-grid {
+  display: grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  align-content: center;
+
+}
+
+
+
+/*carousel weather data*/
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+
+@media (max-height: 370px){
+  .carousel-item img{
+    height: 140vh;
+  }
+}
+
+@media (min-height: 371px) and (max-height: 600px){
+  .carousel-item img{
+    height: 100vh;
+  }
+}
+
+@media (min-height: 601px){
+  .carousel-item img{
+    height: 50vh;
+  }
+}
+@media (min-height: 500px) and (max-width: 500px){
+  .carousel-item img{
+    height: 70vh;
+  }
+}
+@media (min-height: 500px) and (max-width: 400px){
+  .carousel-item img{
+    height: 90vh;
+  }
+}
+
+
+
+/* single month timeline scroll */
+
+.scrollable-SingleMonthTl {
+  max-height: 300px;
+  height: max-content;
+  overflow-y: auto;
+}
+
+/* quarter month pick buttons */
+
+.selection-button {
+border:transparent;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.selection-button:focus,
+.selection-button:focus-visible {
+
+  box-shadow: 0 0 0 0.25rem rgba(map-get($custom-colors,"offwhite"), 0.5);
+  border-color: rgba(map-get($custom-colors,"sage-light"), 0.5);
+}
+
+/* utility */
+
+.nav-style {
+  color: map-get($custom-colors, "sage");
+}
+
+.opacity-50{
+  opacity: 0.5;
+}
+
+.btn-fixed-size {
+  width: 170px;
+}
+
+.table-bg-blur {
+  backdrop-filter: blur(5px) !important;
+}
+
+
+/* scrollbars */
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 5px;
+  background: rgba(228, 231, 228, 0.25);
+  border-radius: 5px;
+
+}
+
+.scrollbar-invis::-webkit-scrollbar {
+  display: none !important;
+
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: map-get($custom-colors,"sage");
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background: map-get($custom-colors,"sage");
+}
+
+::-webkit-scrollbar-thumb {
+  background: map-get($custom-colors,"sage");
+  border-radius: 5px;
+}

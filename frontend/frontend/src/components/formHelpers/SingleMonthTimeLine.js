@@ -1,5 +1,4 @@
 import React from "react";
-import {Col, Container, Row} from "react-bootstrap";
 import {monthWeeks} from "../../constants/helper";
 
 export function SingleMonthTimeLine({timelinePlants, actionKey, monthFilter}) {
@@ -22,48 +21,47 @@ export function SingleMonthTimeLine({timelinePlants, actionKey, monthFilter}) {
     return (
         <>
 
-            <div className="row mt-2 mb-3">
+            <div className="g-1 text-center mb-3">
                 <h5>{actionKey} in {monthFilter}</h5>
             </div>
 
 
-            <Container className="scrollable-SingleMonthTl scrollbar-custom">
-                <Row className="py-1">
+            <div className="container scrollable-SingleMonthTl scrollbar-custom">
+                <div className="row g-1">
 
                     {filteredTl.map((plant, index) => (
 
-                        <Row key={index} className="my-3 ">
-                            <Col>
+                        <div key={index} className="row g-1">
+                            <div className={"col g-0"}>
 
                                 {plant.plant}
 
-                            </Col>
-                            <Col>
+                            </div>
+                            <div className={"col g-0"}>
 
-                                <Row className="my-2">
+                                <div className="row">
                                     {[...Array(4)].map((_, idx) => (
 
-                                        <Col key={idx}>
+                                        <div key={idx} className={"col pt-2"}>
                                             {plant.time && monthWeeks[monthFilter] && plant.time.includes(monthWeeks[monthFilter][idx])
                                                 ? <div className="dot bg-light opacity-75"></div>
                                                 : <div className="dot bg-light opacity-25"></div>
                                             }
 
-                                        </Col>
+                                        </div>
 
 
                                     ))}
-                                </Row>
+                                </div>
 
-                            </Col>
-                            <div className="p-2 border-bottom opacity-25"/>
-                        </Row>
-
+                            </div>
+                            <div className="p-1 mb-1 border-bottom border-sage-light"/>
+                        </div>
 
                     ))}
 
-                </Row>
-            </Container>
+                </div>
+            </div>
         </>
     )
 }

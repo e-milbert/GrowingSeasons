@@ -41,63 +41,61 @@ export function Dashboard() {
     return (
         <>
             {isLoading ? (
-                <Row className="min-vh-100 d-flex justify-content-center align-items-center">
-                    <Col className="d-flex justify-content-center align-items-center">
+                <div className="row min-vh-100 d-flex justify-content-center align-items-center">
+                    <div className="col d-flex justify-content-center align-items-center">
                         <LoadingAnimation/>
-                    </Col>
+                    </div>
 
-                </Row>
+                </div>
             ) : (
                 <>
-                    <InformationC/>
 
 
-                    <Container className="bg-container rounded-3">
 
-                        <Row className="col mb-4 pt-3">
+                    <div className="container container-style pb-5">
+                        <InformationC/>
+                        <div className="row g-5 mt-3">
 
-                            <Col className="col-6">
+                            <div className={"col col-md-12 col-lg-6 col-sm-12"}>
 
-                                <Container className="bg-transparent text-center ">
+                                <div className="container border border-1 border-sage-light rounded-3 p-3">
                                     <SingleMonthTimeLine timelinePlants={allTimes} monthFilter={monName}
                                                          actionKey={"sowing"}/>
-                                </Container>
-                            </Col>
+                                </div>
+                            </div>
 
-                            <Col className="col-6">
+                            <div className={"col col-md-12 col-lg-6 col-sm-12"}>
 
-                                <Container className="bg-transparent text-center">
+                                <div className="container  border border-1 border-sage-light rounded-3 p-3">
                                     <SingleMonthTimeLine timelinePlants={allTimes} monthFilter={monName}
                                                          actionKey={"planting"}/>
-                                </Container>
+                                </div>
 
-                            </Col>
+                            </div>
 
-                        </Row>
 
-                        <Row className="col">
 
-                            <Col className="col-6">
+                            <div className={"col col-md-12 col-lg-6 col-sm-12"}>
 
-                                <Container className="bg-transparent text-center">
+                                <div className="container  border border-1 border-sage-light rounded-3 p-3">
                                     <SingleMonthTimeLine timelinePlants={allTimes} monthFilter={monName}
                                                          actionKey={"harvest"}/>
-                                </Container>
+                                </div>
 
-                            </Col>
+                            </div>
 
-                            <Col className="col-6">
+                            <div className={"col col-md-12 col-lg-6 col-sm-12"}>
 
-                                <Container className="bg-transparent text-center">
+                                <div className="container  border border-1 border-sage-light rounded-3 p-3">
                                     <SingleMonthTimeLine timelinePlants={allTimes} monthFilter={monName}
                                                          actionKey={"bloom"}/>
-                                </Container>
+                                </div>
 
-                            </Col>
+                            </div>
 
-                        </Row>
+                        </div>
 
-                    </Container>
+                    </div>
                 </>
             )}
         </>

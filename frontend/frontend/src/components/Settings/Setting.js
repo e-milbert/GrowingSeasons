@@ -64,48 +64,58 @@ export function Setting() {
     return (
         <>
 
-            <Row>
-                <Col>
-                    <Container className={"bg-container d-flex justify-content-center p-5 rounded-3"}>
-                        <Card className={"bg-transparent m-2 p-2 border-0"}>
-                            <Card.Title className={"text-white"}>weather settings</Card.Title>
-                            <Card.Body>
-                                <Row className={"d-flex justify-content-evenly"}>
-                                    <Col>
-                                        <OneLineFormC handleInputChangeFunction={handleLatitude}
-                                                      idName={"lat"}
-                                                      labelText={"Latitude"} placeholderText={""}/>
-
-                                    </Col>
-                                    <Col>
-                                        <OneLineFormC handleInputChangeFunction={handleLongitude}
-                                                      idName={"long"}
-                                                      labelText={"Longitude"} placeholderText={""}/>
-                                    </Col>
-                                    <Col>
-                                        {!loadingWeatherUpdate ?
-                                            <Button
-                                                className={"custom-button text-black p-2"} type={"button"}
-                                                onClick={updateWeather}>submit</Button> :
-                                            <i className='bx bxs-florist text-white bx-tada bx-md'/>
-                                        }
-                                    </Col>
-                                </Row>
-                                {weatherPreference.latitude > 90 || weatherPreference.latitude < -90 || weatherPreference.longitude > 180 || weatherPreference.longitude < -180 ?
-                                    <Row>
-                                        <Col>
-                                            <div className={"ms-5 fs-6 fw-normal text-warning-emphasis"}>latitude is
-                                                from -180 to 180and longitude is from -90 to 90
+            <div className="row">
+                <div className="col">
+                    <div className="container bg-container d-flex justify-content-center p-5 rounded-3">
+                        <div className="card bg-transparent m-2 p-2 border-0">
+                            <h5 className="card-title">Weather Settings</h5>
+                            <div className="card-body">
+                                <div className="row d-flex align-items-center">
+                                    <div className="col">
+                                        <OneLineFormC
+                                            handleInputChangeFunction={handleLatitude}
+                                            idName={"lat"}
+                                            labelText={"Latitude"}
+                                            placeholderText={""}
+                                        />
+                                    </div>
+                                    <div className="col">
+                                        <OneLineFormC
+                                            handleInputChangeFunction={handleLongitude}
+                                            idName={"long"}
+                                            labelText={"Longitude"}
+                                            placeholderText={""}
+                                        />
+                                    </div>
+                                    <div className="col">
+                                        {!loadingWeatherUpdate ? (
+                                            <button
+                                                className="btn btn-sage-light text-black p-2"
+                                                type="button"
+                                                onClick={updateWeather}
+                                            >
+                                                Submit
+                                            </button>
+                                        ) : (
+                                            <i className='bx bxs-florist text-white bx-tada bx-md'></i>
+                                        )}
+                                    </div>
+                                </div>
+                                {weatherPreference.latitude > 90 || weatherPreference.latitude < -90 || weatherPreference.longitude > 180 || weatherPreference.longitude < -180 ? (
+                                    <div className="row">
+                                        <div className="col">
+                                            <div className="ms-5 fs-6 fw-normal text-warning-emphasis">
+                                                Latitude is from -90 to 90 and longitude is from -180 to 180
                                             </div>
-                                        </Col>
-                                    </Row> : null
-                                }
-                            </Card.Body>
+                                        </div>
+                                    </div>
+                                ) : null}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                        </Card>
-                    </Container>
-                </Col>
-            </Row>
         </>
     )
 

@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>plant.planner</groupId>
-    <artifactId>plantplanner</artifactId>
+    <artifactId>GrowingSeasons</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>plantplanner</name>
     <description>plantplanner</description>
@@ -84,7 +84,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>plant.planner.plantplanner.PlantplannerApplication</mainClass>
+                            <mainClass>app.growingseasons.server.GrowingSeasons</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

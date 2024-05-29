@@ -51,49 +51,46 @@ export function AddAttributeModal({setIsShowing, typeName, isShowing, setDataCal
 
     return (
         <>
-            <Modal
-                size={"lg"}
-
-                show={Show}
-                onHide={() => handleHide(false)}
-
-                dialogClassName="modal-custom-bg"
-            >
-
-                <Modal.Header closeButton>
-
-                </Modal.Header>
-
-                <Modal.Body>
-
-                    <>
-
-                        {isLoading ? (
-                            <div className={"text-center"}>
-                                <LoadingAnimation/>
-                            </div>
-
-
-                        ) : (
-                            <>
-
-                                <OneLineFormC idName={`${typeName}add`} labelText={`new ${typeName}`}
-                                              placeholderText={""} handleInputChangeFunction={updateValue}
-                                              focus={true}/>
-                                <div className="text-center mt-4 mb-3">
-                                    <button className="custom-button rounded-3" disabled={isAddDisabled} type={"submit"}
-                                            onClick={handleSubmit}>add
-                                    </button>
+            <div className={`modal fade ${Show ? 'show' : ''}`} id="customModal" tabIndex="-1" role="dialog"
+                 aria-labelledby="customModalLabel" aria-hidden="true" style={{display: Show ? 'block' : 'none'}}>
+                <div className="modal-dialog modal-lg modal-dialog-centered modal-custom-bg" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <button type="button" className="btn btn-close ms-auto" aria-label="Close"
+                                    onClick={() => handleHide(false)}>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            {isLoading ? (
+                                <div className="text-center">
+                                    <LoadingAnimation/>
                                 </div>
+                            ) : (
+                                <>
+                                    <OneLineFormC
+                                        idName={`${typeName}add`}
+                                        labelText={`new ${typeName}`}
+                                        placeholderText=""
+                                        handleInputChangeFunction={updateValue}
+                                        focus={true}
+                                    />
+                                    <div className="text-center mt-4 mb-3">
+                                        <button
+                                            className="btn btn-sage-light rounded-3"
+                                            disabled={isAddDisabled}
+                                            type="submit"
+                                            onClick={handleSubmit}
+                                        >
+                                            add
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            </>
-                        )}
-
-                    </>
-
-                </Modal.Body>
-
-            </Modal>
         </>
     )
 
