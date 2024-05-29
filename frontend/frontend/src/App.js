@@ -1,6 +1,5 @@
 
 import "./custom.scss";
-import "./App.css"
 import {NavigationC} from "./components/shared/NavigationC";
 
 
