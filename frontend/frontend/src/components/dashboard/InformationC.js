@@ -127,7 +127,7 @@ export function InformationC() {
 
                                     <h4>{date} {currentWeather["time"]}</h4>
 
-                                    <table className="table table-responsive text-black table-bg-transp-blur ">
+                                    <table className="table table-responsive table-bg-blur ">
                                         <tbody className="text-start fw-semibold">
                                         <tr>
                                             <td><i className='bx bxs-thermometer bx-sm'/></td>
@@ -161,7 +161,7 @@ export function InformationC() {
                                 <div className="carousel-caption">
 
                                     <h4 className={"text-center"}>soil conditions this week</h4>
-                                    <table className="table table-responsive text-black table-bg-transp-blur ">
+                                    <table className="table table-responsive table-bg-blur ">
                                         <thead>
                                         <tr>
                                             <th scope={"col"} colSpan={1} className={"text-start"}>
@@ -200,7 +200,7 @@ export function InformationC() {
                                 <div className="carousel-caption">
 
                                     <h4>forecast</h4>
-                                    <table className="table table-responsive table-sm text-black table-bg-transp-blur ">
+                                    <table className="table table-responsive table-sm table-bg-blur ">
                                         <thead>
                                         <tr>
                                             <th scope={"col"}>

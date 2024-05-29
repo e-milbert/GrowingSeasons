@@ -18,7 +18,7 @@ export function QuarterMonthTimeLinePicker2({actionName, onChange}) {
     };
 
     const getButtonStyle = (subcolNumber) => {
-        return timeLine.includes(subcolNumber) ? "m-0 p-0 selection-button selection-button-chosen" : "m-0 p-0 selection-button selection-button-notchosen";
+        return timeLine.includes(subcolNumber) ? "btn border-1 m-0 p-0 selection-button bg-sage-light" : "btn border-1 m-0 p-0 selection-button bg-sage-light opacity-50";
     };
 
     return (
@@ -44,10 +44,11 @@ export function QuarterMonthTimeLinePicker2({actionName, onChange}) {
                                         {[startSubcol, startSubcol + 1, startSubcol + 2, endSubcol].map(subcolNumber => (
                                             <div key={subcolNumber} className="col my-1 col-border-top mx-0 p-0">
                                                 <button
+                                                    type="button"
                                                     className={getButtonStyle(subcolNumber)}
                                                     onClick={() => addActionToTimeLine(subcolNumber)}
 
-                                                    type="button">
+                                                    >
 
                                                 </button>
                                             </div>
@@ -81,7 +82,7 @@ export function QuarterMonthTimeLinePickerEdit({actionName, onChange, preselecte
     };
 
     const getButtonStyle = (subcolNumber) => {
-        return timeLine.includes(subcolNumber) ? "m-0 p-0 selection-button bg-sage-light" : "m-0 p-0 selection-button bg-sage-light opacity-50";
+        return timeLine.includes(subcolNumber) ? "btn m-0 p-0 selection-button bg-sage-light" : "btn m-0 p-0 selection-button bg-sage-light opacity-50";
     };
     //TODO:color not distinct enough
 
@@ -107,12 +108,10 @@ export function QuarterMonthTimeLinePickerEdit({actionName, onChange, preselecte
                                     <div className={"row"}>
                                         {[startSubcol, startSubcol + 1, startSubcol + 2, endSubcol].map(subcolNumber => (
                                             <div key={subcolNumber} className="col my-1 col-border-top mx-0 p-0">
-                                                <button
+                                                <button type="button"
                                                     className={getButtonStyle(subcolNumber)}
                                                     onClick={() => addActionToTimeLine(subcolNumber)}
-
-                                                    type="button">
-
+                                                    >
                                                 </button>
                                             </div>
                                         ))}
