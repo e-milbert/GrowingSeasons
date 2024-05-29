@@ -1,4 +1,4 @@
-# Plant Planner
+# GrowingSeasons
 
 This application aimes at helping hobby gardeners like myself with crop rotation and planning sowing / planting of their plants. 
 The current planting planner is a prototype and will be tested by me during this gardening season. Weather data is fetched from the Open-Meteo Api
